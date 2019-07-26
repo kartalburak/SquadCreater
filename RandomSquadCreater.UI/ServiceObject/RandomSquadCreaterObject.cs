@@ -37,7 +37,7 @@ namespace RandomSquadCreater.UI.ServiceObject
                     MaxArrayLength = 2147483647,
                     MaxStringContentLength = 2147483647
                 }
-            };
+            }; 
             var uri = "http://localhost:63746/RandomSquadService.svc?wsdl";
 
             Service = new RandomServiceHelper.RandomSquadServiceClient(binding, new EndpointAddress(uri));
