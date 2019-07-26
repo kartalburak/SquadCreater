@@ -1,0 +1,52 @@
+﻿
+@using RandomSquadCreater.Core
+@model IEnumerable<RandomSquadCreater.Core.Score>
+@{
+    ViewBag.Title = "ScoreList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Oyuncu Listesi</h3>
+            </div>
+            <div class="box-body  table-responsive no-padding">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th>Oyuncu Ad Soyad</th>
+                        <th>Ortalama Puanı</th>
+                        <th>Son Etkinlik Tarihi</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    @{
+                        List<Player> players = ViewBag.PlayerList;
+
+
+                    }
+
+                    @foreach (var item in Model)
+                    {
+
+                        string player = players.Where(x => x.PlayerId == @item.PlayerId).Select(x => x.PlayerName + " " + x.PlayerSurname).FirstOrDefault();
+
+                        <tr>
+                            <td>@player</td>
+                            <td>@item.AvaragePoint</td>
+                            <td>@item.EventDate</td>
+                        </tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </div>
+    <!-- /.col -->
+</div>
+

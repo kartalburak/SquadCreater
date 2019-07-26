@@ -1,0 +1,116 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-md-1">
+
+    </div>
+    <div class="col-md-6">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Oyuncu Kayıt</h3>
+            </div>
+            <form role="form" method="post" action="Register">
+                <div class="box-body">
+                    <div class="form-group">
+                        <label for="Name">Adınız</label>
+                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Adınızı giriniz">
+                    </div>
+                    <div class="form-group">
+                        <label for="Surname">Soyadınız</label>
+                        <input type="text" class="form-control" id="Surname" name="Surname" placeholder="Soyadınızı giriniz">
+                    </div>
+
+                    <label>Email adres</label>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                        <input type="email" name="Email" class="form-control" placeholder="Email bilginizi giriniz">
+                    </div><br />
+                    <div class="form-group">
+                        <label for="Power">Güç</label>
+                        <input type="number" class="form-control" id="exampleInputPower" name="Power" placeholder="Tahmini güç değerinizi giriniz">
+                    </div>
+
+                    <label>Kullanıcı Adı</label>
+                    <div class="input-group">
+                        <span class="input-group-addon">@@</span>
+                        <input type="text" class="form-control" name="Username" placeholder="Kullanıcı Adınızı Giriniz">
+                    </div>
+                    <div class="form-group">
+                        <label for="Password">Şifre</label>
+                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Şifre">
+                    </div>
+                    <div class="form-group">
+                        <label>Mevki Seçiniz</label>
+                        <select name="Positions" class="form-control">
+                            <option value="GoalKeeper">GoalKeeper</option>
+                            <option value="Deffence">Deffence</option>
+                            <option value="MidField">MidField</option>
+                            <option value="Forward">Forward</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="File">Profil Fotoğrafı Seçiniz</label>
+                        <input type="file" name="File" id="File">
+                        @*<p class="help-block">Profil fotoğrafı seçiniz</p>*@
+                    </div>
+                  
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer">
+                    <button type="submit" name="btnregister" id="btnregister" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-md-5">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $("#btnregister").click(function() {
+            var player = {
+                Email: $('#Email').val(),
+                Name: $('#Name').val(),
+                Surname: $('#Surname').val(),
+                Power: $('#Power').val(),
+                Position: $('#Positions').val(),
+                Password: $('#Password').val(),
+                Username: $('#Username').val(),              
+                
+            }
+
+            $.ajax({
+                url: 'Home/Register',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: player,
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    $('#response pre').html(JSON.stringify(data));
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+
+        $("#divradio input:radio").
+
+
+
+
+
+    });
+
+</script>

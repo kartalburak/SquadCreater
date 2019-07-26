@@ -1,0 +1,90 @@
+﻿@using RandomSquadCreater.Core
+
+@{
+    ViewBag.Title = "PrivateChat";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    Player currentplayer = new Player();
+
+    if (Session["user"] != null)
+    {
+        currentplayer = Session["user"] as Player;
+
+    }
+    string name = currentplayer.PlayerName + " " + currentplayer.PlayerSurname;
+    string dt = DateTime.Now.ToShortDateString();
+}
+
+
+<script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+
+
+<div class="row">
+
+
+
+
+    <div class="col-md-3">
+        <!-- DIRECT CHAT PRIMARY -->
+        <div class="box box-primary direct-chat direct-chat-primary">
+            <div class="box-header with-border">
+                <h3 class="box-title">Canlı Mesaj Odası</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                    <div class="direct-chat-msg">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-left" id="sendchatname">@name</span>
+                            <span class="direct-chat-timestamp pull-right">@dt</span>
+                        </div>
+
+                        <img class="direct-chat-img" src="~/Content/AdminLTE-2.4.5/dist/img/user1-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            Is this template really for free? That's unbelievable!
+                        </div>
+                    </div>
+                    <!-- /.direct-chat-msg -->
+                    <!-- Message to the right -->
+                    <div class="direct-chat-msg right">
+                        <div class="direct-chat-info clearfix">
+                            <span class="direct-chat-name pull-right">@ViewBag.Name</span>
+                            <span class="direct-chat-timestamp pull-left">@dt</span>
+                        </div>
+                        <!-- /.direct-chat-info -->
+                        <img class="direct-chat-img" src="~/Content/AdminLTE-2.4.5/dist/img/user3-128x128.jpg" alt="Message User Image"><!-- /.direct-chat-img -->
+                        <div class="direct-chat-text">
+                            You better believe it!
+                        </div>
+                        <!-- /.direct-chat-text -->
+                    </div>
+                </div>
+            </div>
+            <!-- /.box-body -->
+            <div class="box-footer">
+                <form action="#" method="post">
+                    <div class="input-group">
+                        <input type="text" id="message" name="message" placeholder="Mesajınızı yazınız ..." class="form-control">
+                        <span class="input-group-btn">
+                            <button id="btnsend" name="btnsend" class="btn btn-primary btn-flat">Gönder</button>
+                        </span>
+                    </div>
+                </form>
+            </div>
+            <!-- /.box-footer-->
+        </div>
+        <!--/.direct-chat -->
+    </div>
+    <div class="col-md-6"></div>
+
+
+</div>
+<br />
+
+
+

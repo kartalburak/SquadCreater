@@ -1,0 +1,149 @@
+﻿@using RandomSquadCreater.Core
+
+@{
+    ViewBag.Title = "PlayerProfile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+
+    Player player = Session["user"] as Player;
+}
+<section class="content-header">
+    <h1>
+        User Profile
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
+        <li class="active">Kullanıcı Profil</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <img class="profile-user-img img-responsive img-circle" src="~/Content/AdminLTE-2.4.5/dist/img/user4-128x128.jpg" alt="User profile picture">
+                    <h3 class="profile-username text-center">@player.PlayerName @player.PlayerSurname</h3>
+                    <p class="text-muted text-center">@player.PlayerPosition - @player.PlayerPower</p>
+
+
+                </div>
+                <!-- /.box-body -->
+            </div>
+
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li><a href="#settings" data-toggle="tab">Ayarlar</a></li>
+                </ul>
+                <div class="tab-content">
+
+                    <div class="active tab-pane" id="settings">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputName" class="col-sm-2 control-label">Ad</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputName" placeholder="Adınız">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputSurname" class="col-sm-2 control-label">Soyad</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputSurname" placeholder="Soyadınız">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputEmail" class="col-sm-2 control-label">Email</label>
+                                <div class="col-sm-10">
+                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputUsername" class="col-sm-2 control-label">Kullanıcı Adı</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputUsername" placeholder="Kullanıcı Adınız">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="inputPower" class="col-sm-2 control-label">Güç</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control" id="inputPower" placeholder="Gücünüz">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputPassword" class="col-sm-2 control-label">Şifreniz</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputPassword" placeholder="Şifreniz">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="inputRePassword" class="col-sm-2 control-label">Şifreniz Tekrar</label>
+                                <div class="col-sm-10">
+                                    <input type="password" class="form-control" id="inputRePassword" placeholder="Şifreniz tekrar">
+                                </div>
+                            </div>
+                            <div class="form-group" id="AdminOrStandart">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" checked="checked" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+
+                                <label for="File" class="col-sm-2 control-label">Profil Fotoğrafı Seçiniz</label>
+                                <div class="col-sm-10">
+                                    <input type="file" name="File" id="File">
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+            </div>
+            <!-- /.nav-tabs-custom -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <!-- /.row -->
+</section>
+
+<script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+
+    $(document).ready(function() {
+
+
+
+        if ('@player.PlayerIsAdmin'=='True') {
+            $('#AdminOrStandart').show();           
+        } else {
+            $('#AdminOrStandart').hide();
+            $('#inputPower').attr('disabled', 'disabled');
+        }
+
+
+
+    });
+
+
+
+</script>

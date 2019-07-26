@@ -1,0 +1,214 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SplashMathModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Mails">
+          <Key>
+            <PropertyRef Name="MailId" />
+          </Key>
+          <Property Name="MailId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" />
+          <Property Name="From" Type="nvarchar" MaxLength="100" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="To" Type="nvarchar(max)" />
+          <Property Name="Subject" Type="nvarchar" MaxLength="500" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="Message" Type="nvarchar(max)" />
+          <Property Name="Type" Type="int" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerName" Type="nvarchar(max)" />
+          <Property Name="PlayerSurname" Type="nvarchar(max)" />
+          <Property Name="PlayerEmail" Type="nvarchar(max)" />
+          <Property Name="PlayerPower" Type="int" />
+          <Property Name="PlayerImageUrl" Type="nvarchar(max)" />
+          <Property Name="PlayerPosition" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlayerPassword" Type="nvarchar(max)" />
+          <Property Name="PlayerUserName" Type="nvarchar(max)" />
+          <Property Name="PlayerIsComing" Type="bit" />
+          <Property Name="PlayerVoteDate" Type="datetime" />
+          <Property Name="PlayerIsOnline" Type="bit" />
+          <Property Name="PlayerConnectionId" Type="nvarchar" MaxLength="50" />
+          <Property Name="PlayerLastLoginTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Rated" Type="int" Nullable="false" />
+          <Property Name="Scored" Type="int" Nullable="false" />
+          <Property Name="Point" Type="int" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ScoreId" />
+          </Key>
+          <Property Name="ScoreId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PlayerId" Type="int" Nullable="false" />
+          <Property Name="EventDate" Type="datetime" Nullable="false" />
+          <Property Name="AvaragePoint" Type="real" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SplashMathModelStoreContainer">
+          <EntitySet Name="Mails" EntityType="Self.Mails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Score" EntityType="Self.Score" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SplashMathModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Mails">
+          <Key>
+            <PropertyRef Name="MailId" />
+          </Key>
+          <Property Name="MailId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" />
+          <Property Name="From" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="To" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Subject" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Type" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="PlayerId" />
+          </Key>
+          <Property Name="PlayerId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerSurname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerPower" Type="Int32" />
+          <Property Name="PlayerImageUrl" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerPosition" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerPassword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerUserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerIsComing" Type="Boolean" />
+          <Property Name="PlayerVoteDate" Type="DateTime" Precision="3" />
+          <Property Name="PlayerIsOnline" Type="Boolean" />
+          <Property Name="PlayerConnectionId" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PlayerLastLoginTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="RatingId" />
+          </Key>
+          <Property Name="RatingId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Rated" Type="Int32" Nullable="false" />
+          <Property Name="Scored" Type="Int32" Nullable="false" />
+          <Property Name="Point" Type="Int32" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Score">
+          <Key>
+            <PropertyRef Name="ScoreId" />
+          </Key>
+          <Property Name="ScoreId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PlayerId" Type="Int32" Nullable="false" />
+          <Property Name="EventDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="AvaragePoint" Type="Single" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="SquadContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Mails" EntityType="Self.Mails" />
+          <EntitySet Name="Player" EntityType="Self.Player" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" />
+          <EntitySet Name="Score" EntityType="Self.Score" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SplashMathModelStoreContainer" CdmEntityContainer="SquadContext">
+          <EntitySetMapping Name="Mails">
+            <EntityTypeMapping TypeName="SplashMathModel.Mails">
+              <MappingFragment StoreEntitySet="Mails">
+                <ScalarProperty Name="MailId" ColumnName="MailId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="From" ColumnName="From" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="To" ColumnName="To" />
+                <ScalarProperty Name="Subject" ColumnName="Subject" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Player">
+            <EntityTypeMapping TypeName="SplashMathModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="PlayerName" ColumnName="PlayerName" />
+                <ScalarProperty Name="PlayerSurname" ColumnName="PlayerSurname" />
+                <ScalarProperty Name="PlayerEmail" ColumnName="PlayerEmail" />
+                <ScalarProperty Name="PlayerPower" ColumnName="PlayerPower" />
+                <ScalarProperty Name="PlayerImageUrl" ColumnName="PlayerImageUrl" />
+                <ScalarProperty Name="PlayerPosition" ColumnName="PlayerPosition" />
+                <ScalarProperty Name="PlayerPassword" ColumnName="PlayerPassword" />
+                <ScalarProperty Name="PlayerUserName" ColumnName="PlayerUserName" />
+                <ScalarProperty Name="PlayerIsComing" ColumnName="PlayerIsComing" />
+                <ScalarProperty Name="PlayerVoteDate" ColumnName="PlayerVoteDate" />
+                <ScalarProperty Name="PlayerIsOnline" ColumnName="PlayerIsOnline" />
+                <ScalarProperty Name="PlayerConnectionId" ColumnName="PlayerConnectionId" />
+                <ScalarProperty Name="PlayerLastLoginTime" ColumnName="PlayerLastLoginTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Rating">
+            <EntityTypeMapping TypeName="SplashMathModel.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="RatingId" ColumnName="RatingId" />
+                <ScalarProperty Name="Rated" ColumnName="Rated" />
+                <ScalarProperty Name="Scored" ColumnName="Scored" />
+                <ScalarProperty Name="Point" ColumnName="Point" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Score">
+            <EntityTypeMapping TypeName="SplashMathModel.Score">
+              <MappingFragment StoreEntitySet="Score">
+                <ScalarProperty Name="ScoreId" ColumnName="ScoreId" />
+                <ScalarProperty Name="PlayerId" ColumnName="PlayerId" />
+                <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+                <ScalarProperty Name="AvaragePoint" ColumnName="AvaragePoint" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

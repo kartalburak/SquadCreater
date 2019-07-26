@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/RandomSquadCreater.Core" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/RandomSquadCreater.Core" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="ArrayOfRating">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Rating" nillable="true" type="tns:Rating" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRating" nillable="true" type="tns:ArrayOfRating" />
+  <xs:complexType name="Rating">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="EventDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Point" type="xs:int" />
+      <xs:element minOccurs="0" name="Rated" type="xs:int" />
+      <xs:element minOccurs="0" name="RatingId" type="xs:int" />
+      <xs:element minOccurs="0" name="Scored" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Rating" nillable="true" type="tns:Rating" />
+  <xs:complexType name="ArrayOfScore">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Score" nillable="true" type="tns:Score" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfScore" nillable="true" type="tns:ArrayOfScore" />
+  <xs:complexType name="Score">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AvaragePoint" type="xs:float" />
+      <xs:element minOccurs="0" name="EventDate" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="ScoreId" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Score" nillable="true" type="tns:Score" />
+  <xs:complexType name="ArrayOfPlayer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Player" nillable="true" type="tns:Player" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPlayer" nillable="true" type="tns:ArrayOfPlayer" />
+  <xs:complexType name="Player">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="PlayerConnectionId" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerEmail" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerId" type="xs:int" />
+      <xs:element minOccurs="0" name="PlayerImageUrl" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerIsComing" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PlayerIsOnline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="PlayerLastLoginTime" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="PlayerName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerPassword" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerPosition" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerPower" type="xs:int" />
+      <xs:element minOccurs="0" name="PlayerSurname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerUserName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="PlayerVoteDate" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Player" nillable="true" type="tns:Player" />
+</xs:schema>

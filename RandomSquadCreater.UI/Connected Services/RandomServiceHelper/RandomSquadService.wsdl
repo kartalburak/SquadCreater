@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="RandomSquadService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:63746/RandomSquadService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:63746/RandomSquadService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:63746/RandomSquadService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/RandomSquadCreater.Core" />
+      <xsd:import schemaLocation="http://localhost:63746/RandomSquadService.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IRandomSquadService_GetAllRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRating" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScore" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetRating" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScore" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetPlayerByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByName" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetPlayerByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPlayerByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeleteRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRating" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeleteRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeleteScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScore" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeleteScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeleteScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeletePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_DeletePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdateRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRating" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdateRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdateScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScore" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdateScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdatePlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_UpdatePlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddRating_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddRating" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddRating_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddRatingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddScore_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddScore" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddScore_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddScoreResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddPlayer_InputMessage">
+    <wsdl:part name="parameters" element="tns:AddPlayer" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_AddPlayer_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AddPlayerResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_Login_InputMessage">
+    <wsdl:part name="parameters" element="tns:Login" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_Login_OutputMessage">
+    <wsdl:part name="parameters" element="tns:LoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllScoreJsonList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScoreJsonList" />
+  </wsdl:message>
+  <wsdl:message name="IRandomSquadService_GetAllScoreJsonList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetAllScoreJsonListResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IRandomSquadService">
+    <wsdl:operation name="GetAllRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllRating" message="tns:IRandomSquadService_GetAllRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllRatingResponse" message="tns:IRandomSquadService_GetAllRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllScore" message="tns:IRandomSquadService_GetAllScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllScoreResponse" message="tns:IRandomSquadService_GetAllScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllPlayer" message="tns:IRandomSquadService_GetAllPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllPlayerResponse" message="tns:IRandomSquadService_GetAllPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetRating" message="tns:IRandomSquadService_GetRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetRatingResponse" message="tns:IRandomSquadService_GetRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetScore" message="tns:IRandomSquadService_GetScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetScoreResponse" message="tns:IRandomSquadService_GetScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetPlayer" message="tns:IRandomSquadService_GetPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetPlayerResponse" message="tns:IRandomSquadService_GetPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetPlayerByName" message="tns:IRandomSquadService_GetPlayerByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetPlayerByNameResponse" message="tns:IRandomSquadService_GetPlayerByName_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/DeleteRating" message="tns:IRandomSquadService_DeleteRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/DeleteRatingResponse" message="tns:IRandomSquadService_DeleteRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeleteScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/DeleteScore" message="tns:IRandomSquadService_DeleteScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/DeleteScoreResponse" message="tns:IRandomSquadService_DeleteScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/DeletePlayer" message="tns:IRandomSquadService_DeletePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/DeletePlayerResponse" message="tns:IRandomSquadService_DeletePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/UpdateRating" message="tns:IRandomSquadService_UpdateRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/UpdateRatingResponse" message="tns:IRandomSquadService_UpdateRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/UpdateScore" message="tns:IRandomSquadService_UpdateScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/UpdateScoreResponse" message="tns:IRandomSquadService_UpdateScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/UpdatePlayer" message="tns:IRandomSquadService_UpdatePlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/UpdatePlayerResponse" message="tns:IRandomSquadService_UpdatePlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/AddRating" message="tns:IRandomSquadService_AddRating_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/AddRatingResponse" message="tns:IRandomSquadService_AddRating_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddScore">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/AddScore" message="tns:IRandomSquadService_AddScore_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/AddScoreResponse" message="tns:IRandomSquadService_AddScore_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AddPlayer">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/AddPlayer" message="tns:IRandomSquadService_AddPlayer_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/AddPlayerResponse" message="tns:IRandomSquadService_AddPlayer_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/Login" message="tns:IRandomSquadService_Login_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/LoginResponse" message="tns:IRandomSquadService_Login_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScoreJsonList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllScoreJsonList" message="tns:IRandomSquadService_GetAllScoreJsonList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IRandomSquadService/GetAllScoreJsonListResponse" message="tns:IRandomSquadService_GetAllScoreJsonList_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IRandomSquadService" type="tns:IRandomSquadService">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GetAllRating">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetAllRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScore">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetAllScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllPlayer">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetAllPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetRating">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetScore">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayer">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPlayerByName">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetPlayerByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteRating">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/DeleteRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeleteScore">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/DeleteScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletePlayer">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/DeletePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateRating">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/UpdateRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateScore">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/UpdateScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePlayer">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/UpdatePlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddRating">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/AddRating" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddScore">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/AddScore" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AddPlayer">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/AddPlayer" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Login">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/Login" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllScoreJsonList">
+      <soap:operation soapAction="http://tempuri.org/IRandomSquadService/GetAllScoreJsonList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RandomSquadService">
+    <wsdl:port name="BasicHttpBinding_IRandomSquadService" binding="tns:BasicHttpBinding_IRandomSquadService">
+      <soap:address location="http://localhost:63746/RandomSquadService.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

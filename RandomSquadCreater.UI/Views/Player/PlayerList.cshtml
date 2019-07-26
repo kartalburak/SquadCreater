@@ -1,0 +1,265 @@
+﻿
+@using RandomSquadCreater.Core
+@model IEnumerable<RandomSquadCreater.Core.Player>
+
+@{
+    ViewBag.Title = "PlayerList";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Oyuncu Listesi</h3>
+            </div>
+            <div class="box-body  table-responsive no-padding">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Adı</th>
+                            <th>Soyadı</th>
+                            <th>Email</th>
+                            <th>Mevki</th>
+                            <th>Gücü</th>
+                            <th>Kullanıcı Adı</th>
+                            @*<th>Geliyor mu?</th>*@
+                            <th>Puanla</th>
+                            <th>Oy Ver</th>
+                            <th>Sohbet Başlat</th>
+
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @{
+
+                            Player player = Session["user"] as Player;
+                        }
+
+
+                        @foreach (var item in Model)
+                        {
+
+
+
+
+                            <tr>
+                                <td>@item.PlayerName</td>
+                                <td>@item.PlayerSurname</td>
+                                <td>@item.PlayerEmail</td>
+                                <td>@item.PlayerPosition</td>
+                                <td>@item.PlayerPower</td>
+                                <td>@item.PlayerUserName</td>
+
+                                <td>
+                                    @if (player.PlayerUserName == item.PlayerUserName)
+                                    {
+
+                                        <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
+                                            Puan Ver
+                                        </button>
+
+                                    }
+                                    else
+                                    {
+                                        <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default">
+                                            Puan Ver
+                                        </button>
+                                    }
+
+
+
+
+                                </td>
+                                <td>
+
+                                    @if (player.PlayerUserName == item.PlayerUserName)
+                                    {
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info">
+                                            Oy Kullan
+                                        </button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info" disabled="disabled">
+                                            Oy Kullan
+                                        </button>
+                                    }
+                                </td>
+                                @if (player.PlayerUserName == item.PlayerUserName)
+                                {
+                                    <td style="padding-left: 50px"></td>
+                                }
+                                else
+                                {
+                                    <td style="padding-left: 50px">
+
+                                        @*@Html.ActionLink('<i class="fa fa-plus-circle"></i>', "Chat", new { Name = item.PlayerName + ' ' + item.PlayerSurname })*@
+                                        @*<a href="~/Home/Chat" id="btnchat" key="Request.QueryString['@item.PlayerName' + ' ' + '@item.PlayerSurname']">
+                                                <i class="fa fa-plus-circle"></i>
+                                            </a>*@
+
+                                        <a href="@Url.Action("Chat", "Chat",new { Name = item.PlayerName + ' ' + item.PlayerSurname })">
+                                            <i class="fa fa-plus-circle"></i>
+                                        </a>
+                                    </td>
+                                }
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </div>
+    <!-- /.col -->
+</div>
+<div class="modal fade" id="modal-default">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Puanlama Tablosu</h4>
+            </div>
+            <form name="formTest" action="PlayerList" method="post">
+
+                <div class="modal-body">
+                    <input type="hidden" id="sender" name="sender" value="players">
+                    <fieldset class="radiogroup">
+                        @*<legend><p id="sender" name="sender">acv</p>'a bu haftaki maç için puan ver !!!</legend>*@
+                        <legend><span id="lblname" name="lblname"></span>'a bu haftaki maç için puan ver !!!</legend>
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="point" name="point" placeholder="1 ile 100 arasında puanınızı Giriniz...">
+                            <br />
+                            <p id="message" style="color:red"></p>
+                        </div>
+                    </fieldset>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">Kapat</button>
+                    <button type="submit" id="btnreply" name="btnreply" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<div class="modal modal-info fade" id="modal-info">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Oy Kullanma Tablosu</h4>
+            </div>
+            <form name="myForm" action="Vote" method="post">
+                <div class="modal-body">
+
+                    <legend>Bu hafta maça geliyor musun?</legend>
+                    <div class="form-group" id="divradio">
+                        <label>
+                            <input type="radio" name="myRadios" id="yes" value="yes" checked="checked" class="minimal">&nbsp;&nbsp;Evet, Geliyorum
+                        </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="myRadios" id="no" value="no" class="minimal">&nbsp;&nbsp;Hayır, Gelmiyorum
+                        </label>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Kapat</button>
+                    <button type="submit" id="btnvote" name="btnvote" class="btn btn-outline">Oyunu Kullan</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+
+<script type="text/javascript">
+    function SendParam(param1) {
+        document.getElementById("sender").value = param1;
+        document.getElementById("lblname").textContent = document.getElementById("sender").value;
+    };
+
+    $(document).ready(function () {
+
+
+        $("#btnvote").click(function () {
+
+            var no = $("#divradio input:radio:checked").val();
+           
+            //alert(no);
+
+            $.ajax({
+                url: 'Player/Vote',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data:  JSON.stringify({ "myvote": no }),
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    $('#response pre').html(JSON.stringify(data));
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+
+        $("#btnreply").click(function () {
+
+            var sender = document.getElementById("lblname").textContent;
+
+            var point = $('#point').val();
+
+
+            $.ajax({
+                url: 'Player/PlayerList',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({ "sender": sender, "point": point }),
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    $('#response pre').html(JSON.stringify(data));
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+
+    });
+
+    function CheckValue() {
+        var point, text;
+
+        point = document.getElementById("point").value;
+        if (isNaN(point) || point < 1 || point > 100) {
+            text = "Geçersiz karakter girdiniz. 1 ile 100 arasında sayı giriniz.";
+        } else {
+            text = "";
+        }
+        document.getElementById("message").innerHTML = text;
+    }
+
+
+
+
+</script>
+
+
+

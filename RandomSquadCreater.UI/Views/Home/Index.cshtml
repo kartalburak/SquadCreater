@@ -1,0 +1,55 @@
+﻿@model IEnumerable<RandomSquadCreater.UI.Models.RateModel>
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+
+
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-header">
+                <h3 class="box-title">Puanlama Tablosu Listesi</h3>
+            </div>
+            <div class="box-body">
+                <table id="example2" class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Puan Veren Kişi</th>
+                            <th>Puan Alan kişi</th>
+                            <th>Puan(100)</th>
+                            <th>Etkinlik Tarihi</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.RatedName</td>
+                                <td>@item.ScoredName</td>
+                                <td>@item.Point</td>
+                                <td>@item.EventDate</td>
+
+                            </tr>
+                        }
+
+
+                    </tbody>
+
+                </table>
+            </div>
+            <!-- /.box-body -->
+        </div>
+
+    </div>
+    <!-- /.col -->
+</div>
+
+
+

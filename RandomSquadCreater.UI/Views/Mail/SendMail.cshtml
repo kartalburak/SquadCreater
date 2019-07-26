@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewBag.Title = "SendMail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="content-header">
+    <h1>
+        Mailbox
+        @*<small>13 new messages</small>*@
+    </h1>
+    <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Anasayfa</a></li>
+        <li class="active">Mailbox</li>
+    </ol>
+</section>
+<!-- Main content -->
+<section class="content">
+    <div class="row">
+
+        <!-- /.col -->
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Yeni Mail Gönder</h3>
+                </div>
+
+                <form action="SendMail" method="post">
+                    <div class="box-body">
+                        <div class="form-group">
+                            <input class="form-control" id="from" name="from" placeholder="Kimden:">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Mail Şifreniz:">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="to" name="to" placeholder="Kime:" title="Birden fazla kişiye mail atacaksanız aralarına ';' koyarak yazınız.">
+                        </div>
+                        <div class="form-group">
+                            <input class="form-control" id="subject" name="subject" placeholder="Konu:">
+                        </div>
+                        <div class="form-group">
+                            <textarea id="compose-textarea" name="compose-textarea" class="form-control" style="height: 300px">                       
+Mesajınızı buraya yazınız ...
+                       
+Test mailim.
+ 
+
+           Saygılarımla,
+           Burak Kartal
+                    </textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="btn btn-default btn-file">
+                                <i class="fa fa-paperclip"></i> Dosya Ekle
+                                <input type="file" name="attachment">
+                            </div>
+                            <p class="help-block">Max. 25MB</p>
+                        </div>
+                    </div>
+                    <div class="box-footer">
+                        <div class="pull-right">
+                            <button type="submit" id="btndraft" name="btndraft" class="btn btn-default"><i class="fa fa-pencil"></i> Taslaklara Kaydet</button>&nbsp;
+                            <button type="submit" id="btnsend" name="btnsend" class="btn btn-primary"><i class="fa fa-envelope-o"></i> Gönder</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <a href="mailbox.html" class="btn btn-primary btn-block margin-bottom">Back to Inbox</a>
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Folders</h3>
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li>
+                            <a href="InboxMail">
+                                <i class="fa fa-inbox"></i> Gelen Kutusu
+                                <span class="label label-primary pull-right">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="SentMail">
+                                <i class="fa fa-envelope-o"></i> Giden Kutusu
+                                <span class="label label-primary pull-right">12</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="DraftMail"><i class="fa fa-file-text-o"></i> Taslaklar <span class="label label-warning pull-right">65</span></a>
+                        </li>
+                        <li><a href="TrashMail"><i class="fa fa-trash-o"></i> Silinenler</a></li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+    </div>
+</section>
+
+<script type="text/javascript">
+
+
+    $(document).ready(function () {
+        $("#btnsend").click(function () {
+
+            var message = document.getElementById("#compose-textarea").value;
+            var to = $("#to").val();
+            var subject = $("#subject").val();
+            var from = $("#from").val();
+            var password = $("#password").val();
+
+            $.ajax({
+                url: 'Mail/SendMail',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: JSON.stringify({
+                    "message": message,
+                    "to": to,
+                    "subject": subject,
+                    "from": from,
+                    "password": password
+                }),
+                processData: false,
+                success: function (data, textStatus, jQxhr) {
+                    $('#response pre').html(JSON.stringify(data));
+                    document.getElementById("#compose-textarea").value;
+                    $("#to").val(' ');
+                    $("#subject").val(' ');
+                    $("#from").val(' ');
+                    $("#password").val(' ');
+                },
+                error: function (jqXhr, textStatus, errorThrown) {
+                    console.log(errorThrown);
+                }
+            });
+        });
+
+    });
+
+
+
+</script>

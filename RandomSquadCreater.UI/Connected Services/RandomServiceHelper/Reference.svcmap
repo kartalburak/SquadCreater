@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ce43c726-7f81-4132-8fe4-d10e4c1e7ee0" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:63746/RandomSquadService.svc?wsdl" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RandomSquadService.xsd" MetadataType="Schema" ID="a1d6b0d2-13db-4fd4-87ae-43d1fa581fdb" SourceId="1" SourceUrl="http://localhost:63746/RandomSquadService.svc?xsd=xsd2" />
+    <MetadataFile FileName="RandomSquadService1.xsd" MetadataType="Schema" ID="e6917bcc-2dad-4e2b-8f90-2117596714a4" SourceId="1" SourceUrl="http://localhost:63746/RandomSquadService.svc?xsd=xsd3" />
+    <MetadataFile FileName="RandomSquadService2.xsd" MetadataType="Schema" ID="20d50051-678d-4050-9e91-5d8987d59598" SourceId="1" SourceUrl="http://localhost:63746/RandomSquadService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RandomSquadService3.xsd" MetadataType="Schema" ID="2171bf7f-32ac-4886-88f3-3c14c8af6cae" SourceId="1" SourceUrl="http://localhost:63746/RandomSquadService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RandomSquadService.wsdl" MetadataType="Wsdl" ID="f95bb1d8-72df-440c-83db-24d57d92fd3c" SourceId="1" SourceUrl="http://localhost:63746/RandomSquadService.svc?wsdl" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>
