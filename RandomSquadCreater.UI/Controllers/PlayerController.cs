@@ -195,9 +195,9 @@ namespace RandomSquadCreater.UI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Grant(FormCollection formCollection)
+        public ActionResult Grant(string txtusername)
         {
-            Player player = service.GetAllPlayer().Where(x => x.PlayerUserName == formCollection["txtusername"]).FirstOrDefault();
+            Player player = service.GetAllPlayer().Where(x => x.PlayerUserName == txtusername).FirstOrDefault();
             player.PlayerIsAdmin = true;
             try
             {

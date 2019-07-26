@@ -158,13 +158,13 @@
                                 <div class="form-group">
                                     <label for="txtusername" class="col-sm-2 control-label">Ad</label>
                                     <div class="col-sm-10">
-                                        <input type="text" class="form-control" id="txtusername" placeholder="Yetki verilecek kullanıcı adını giriniz">
+                                        <input type="text" class="form-control" name="txtusername" id="txtusername" placeholder="Yetki verilecek kullanıcı adını giriniz">
                                     </div>
                                 </div>
 
                                 <div class="form-group">
                                     <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" id="btngrant" class="btn btn-primary">Güncelle</button>
+                                        <button type="submit" id="btngrant" name="btngrant" class="btn btn-primary">Güncelle</button>
                                     </div>
                                 </div>
                             }
@@ -194,7 +194,7 @@
         $('#btngrant').click(function() {
 
             var txtusername = $("#txtusername").val();
-            alert(txtusername)
+            //alert(txtusername)
             //alert(no);
 
             $.ajax({
@@ -202,13 +202,13 @@
                 dataType: 'json',
                 type: 'post',
                 contentType: 'application/json',
-                data: txtusername,
+                data: JSON.stringify({ "txtusername": txtusername }),
                 processData: false,
                 success: function (data) {
                     $('#response pre').html(JSON.stringify(data));
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
-                    alert("Statüs : "+textStatus+" Mesaj :"+ errorThrown);
+                    console.log(textStatus, errorThrown);
                 }
             });
 
