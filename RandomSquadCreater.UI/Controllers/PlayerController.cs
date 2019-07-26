@@ -1,6 +1,5 @@
 ﻿using RandomSquadCreater.Core;
 using RandomSquadCreater.UI.Infrastructure;
-using RandomSquadCreater.UI.Models;
 using RandomSquadCreater.UI.ServiceObject;
 using System;
 using System.Linq;
@@ -33,7 +32,7 @@ namespace RandomSquadCreater.UI.Controllers
             catch (Exception e)
             {
                 Log.Error(e.Message);
-                return View();
+
             }
 
             #endregion
@@ -53,7 +52,7 @@ namespace RandomSquadCreater.UI.Controllers
             catch (Exception e)
             {
                 Log.Error(e.Message);
-                return View();
+
             }
 
             #endregion
@@ -76,7 +75,7 @@ namespace RandomSquadCreater.UI.Controllers
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
-                    return View();
+
                 }
 
             }
@@ -92,14 +91,16 @@ namespace RandomSquadCreater.UI.Controllers
                 catch (Exception e)
                 {
                     Log.Error(e.Message);
-                    return View();
+
                 }
 
             }
             #endregion
 
-            return RedirectToAction("PlayerList", "Player");
+            return RedirectToAction("PlayerList", "Player", service.GetAllPlayer());
         }
+
+        [HttpGet]
         public ActionResult PlayerList()
         {
             if (Session["user"] == null)
@@ -156,10 +157,14 @@ namespace RandomSquadCreater.UI.Controllers
                 throw;
             }
 
-
-
+            //Redirect("~/Player/PlayerList");
+            //RedirectToAction("PlayerList");
+            //return RedirectToAction("PlayerList", "Player", service.GetAllPlayer());
             return RedirectToAction("PlayerList", "Player");
+
+            //return Json(new { data = true }, JsonRequestBehavior.AllowGet);
         }
+
 
         [HttpPost]
         public ActionResult PlayerListByKey(FormCollection formCollection)
@@ -179,6 +184,7 @@ namespace RandomSquadCreater.UI.Controllers
 
         }
 
+
         public ActionResult PlayerProfile()
         {
             if (Session["user"] == null)
@@ -186,6 +192,25 @@ namespace RandomSquadCreater.UI.Controllers
                 return RedirectToAction("Login", "Home");
             }
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Grant(FormCollection formCollection)
+        {
+            Player player = service.GetAllPlayer().Where(x => x.PlayerUserName == formCollection["txtusername"]).FirstOrDefault();
+            player.PlayerIsAdmin = true;
+            try
+            {
+                service.UpdatePlayer(player);
+                Log.Info(player.PlayerName+" "+player.PlayerSurname+"'a yetki verildi.");
+            }
+            catch (Exception e)
+            {
+                Log.Error(e.Message);
+                throw;
+            }
+
+            return RedirectToAction("PlayerProfile","Player");
         }
 
     }

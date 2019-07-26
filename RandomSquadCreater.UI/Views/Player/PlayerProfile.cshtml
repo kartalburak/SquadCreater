@@ -48,56 +48,72 @@
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Ad</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName" placeholder="Adınız">
+                                    <input type="text" class="form-control" id="inputName" value="@player.PlayerName">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputSurname" class="col-sm-2 control-label">Soyad</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSurname" placeholder="Soyadınız">
+                                    <input type="text" class="form-control" id="inputSurname" value="@player.PlayerSurname">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" placeholder="Email">
+                                    <input type="email" class="form-control" id="inputEmail" value="@player.PlayerEmail">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="inputUsername" class="col-sm-2 control-label">Kullanıcı Adı</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputUsername" placeholder="Kullanıcı Adınız">
+                                    <input type="text" class="form-control" id="inputUsername" value="@player.PlayerUserName">
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <label for="inputPower" class="col-sm-2 control-label">Güç</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputPower" placeholder="Gücünüz">
+                                    <input type="text" class="form-control" id="inputPower" value="@player.PlayerPower">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="col-sm-2 control-label">Şifreniz</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword" placeholder="Şifreniz">
+                                    <input type="password" class="form-control" id="inputPassword" value="@player.PlayerPassword">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputRePassword" class="col-sm-2 control-label">Şifreniz Tekrar</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputRePassword" placeholder="Şifreniz tekrar">
+                                    <input type="password" class="form-control" id="inputRePassword" value="@player.PlayerPassword">
                                 </div>
                             </div>
-                            <div class="form-group" id="AdminOrStandart">
-                                <div class="col-sm-offset-2 col-sm-10">
-                                    <div class="checkbox">
-                                        <label>
-                                            <input type="checkbox" checked="checked" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
-                                        </label>
+                            @if (player.PlayerIsAdmin)
+                            {
+                                <div class="form-group" id="AdminOrStandart">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" checked="checked" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
+                                            </label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+                            else
+                            {
+                                <div class="form-group" id="AdminOrStandart">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+
                             <div class="form-group">
 
                                 <label for="File" class="col-sm-2 control-label">Profil Fotoğrafı Seçiniz</label>
@@ -109,7 +125,7 @@
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                    <button type="submit" class="btn btn-primary">Güncelle</button>
                                 </div>
                             </div>
                         </form>
@@ -123,6 +139,49 @@
         <!-- /.col -->
     </div>
 
+    @if (player.PlayerIsAdmin)
+    {
+        <div class="row">
+            <div class="col-md-3"></div>
+            <!-- /.col -->
+            <div class="col-md-9">
+                <div class="nav-tabs-custom">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#settings" data-toggle="tab">Yetki Verme</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div class="active tab-pane" id="settings">
+
+                            @using (Html.BeginForm("Grant", "Player", FormMethod.Post, new { @class = "form-horizontal" }))
+                            {
+                                <div class="form-group">
+                                    <label for="txtusername" class="col-sm-2 control-label">Ad</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="txtusername" placeholder="Yetki verilecek kullanıcı adını giriniz">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" id="btngrant" class="btn btn-primary">Güncelle</button>
+                                    </div>
+                                </div>
+                            }
+
+                        </div>
+                        <!-- /.tab-pane -->
+                    </div>
+                    <!-- /.tab-content -->
+                </div>
+                <!-- /.nav-tabs-custom -->
+            </div>
+            <!-- /.col -->
+        </div>
+    }
+
+
+
     <!-- /.row -->
 </section>
 
@@ -132,9 +191,36 @@
     $(document).ready(function() {
 
 
+        $('#btngrant').click(function() {
+
+            var txtusername = $("#txtusername").val();
+            alert(txtusername)
+            //alert(no);
+
+            $.ajax({
+                url: 'Player/Grant',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: txtusername,
+                processData: false,
+                success: function (data) {
+                    $('#response pre').html(JSON.stringify(data));
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    alert("Statüs : "+textStatus+" Mesaj :"+ errorThrown);
+                }
+            });
+
+
+
+        });
+
+
+
 
         if ('@player.PlayerIsAdmin'=='True') {
-            $('#AdminOrStandart').show();           
+            $('#AdminOrStandart').show();
         } else {
             $('#AdminOrStandart').hide();
             $('#inputPower').attr('disabled', 'disabled');

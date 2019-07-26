@@ -93,7 +93,7 @@ namespace RandomSquadCreater.UI.Controllers
             player.PlayerPassword = formCollection["Password"];
             player.PlayerPosition = formCollection["Positions"];
             player.PlayerPower = Convert.ToInt32(formCollection["Power"]);
-            //player.PlayerIsAdmin=Convert.ToBoolean(formCollection["isAdmin"]);
+            player.PlayerIsAdmin = false;
 
             if (service.SavePlayer(player))
             {
