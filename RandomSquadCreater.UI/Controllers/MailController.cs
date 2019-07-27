@@ -11,6 +11,7 @@ namespace RandomSquadCreater.UI.Controllers
     {
         RandomSquadCreaterObject service = new RandomSquadCreaterObject();
 
+        [ValidateInput(false)]
         public ActionResult SendMail()
         {
 
@@ -19,6 +20,7 @@ namespace RandomSquadCreater.UI.Controllers
         }
 
         [HttpPost]
+        [ValidateInput(false)]
         public ActionResult SendMail(FormCollection formCollection)
         {
 
