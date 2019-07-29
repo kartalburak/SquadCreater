@@ -202,7 +202,7 @@ namespace RandomSquadCreater.UI.Controllers
             try
             {
                 service.UpdatePlayer(player);
-                Log.Info(player.PlayerName+" "+player.PlayerSurname+"'a yetki verildi.");
+                Log.Info(player.PlayerName + " " + player.PlayerSurname + "'a yetki verildi.");
             }
             catch (Exception e)
             {
@@ -210,7 +210,41 @@ namespace RandomSquadCreater.UI.Controllers
                 throw;
             }
 
-            return RedirectToAction("PlayerProfile","Player");
+            return RedirectToAction("PlayerProfile", "Player");
+        }
+
+        public ActionResult EditPlayer(FormCollection formCollection)
+        {
+
+            if (formCollection["inputPassword"] == formCollection["inputRePassword"])
+            {
+                Player player = service.GetPlayer(formCollection["inputEmail"]);
+
+                player.PlayerUserName = formCollection["inputUsername"];
+                player.PlayerName = formCollection["inputName"];
+                player.PlayerSurname = formCollection["inputSurname"];
+                player.PlayerPassword = formCollection["inputPassword"];
+                player.PlayerEmail = formCollection["inputEmail"];
+                player.PlayerPower = Convert.ToInt32(formCollection["inputPower"]);
+                player.PlayerIsAdmin = formCollection["playerAdmin"] == null ? false : true;
+                player.PlayerPosition = formCollection["inputPosition"].Contains("GoalKeeper") || formCollection["inputPosition"].Contains("Deffence") || formCollection["inputPosition"].Contains("MidField") || formCollection["inputPosition"].Contains("Forward") ? formCollection["inputPosition"] : null;
+
+                try
+                {
+                    service.UpdatePlayer(player);
+                    Session["user"] = player;
+                    Log.Info(player.PlayerName + " " + player.PlayerSurname + "'ın bilgileri güncellendi.");
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+
+
+
+
+            return RedirectToAction("PlayerProfile", "Player");
         }
 
     }

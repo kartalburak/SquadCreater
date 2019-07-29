@@ -44,58 +44,69 @@
                 <div class="tab-content">
 
                     <div class="active tab-pane" id="settings">
-                        <form class="form-horizontal">
+
+
+                        @using (Html.BeginForm("EditPlayer", "Player", FormMethod.Post, new { @class = "form-horizontal" }))
+                        {
                             <div class="form-group">
                                 <label for="inputName" class="col-sm-2 control-label">Ad</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputName" value="@player.PlayerName">
+                                    <input type="text" class="form-control" id="inputName" name="inputName" value="@player.PlayerName">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputSurname" class="col-sm-2 control-label">Soyad</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputSurname" value="@player.PlayerSurname">
+                                    <input type="text" class="form-control" id="inputSurname" name="inputSurname" value="@player.PlayerSurname">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputEmail" class="col-sm-2 control-label">Email</label>
                                 <div class="col-sm-10">
-                                    <input type="email" class="form-control" id="inputEmail" value="@player.PlayerEmail">
+                                    <input type="email" class="form-control" id="inputEmail" name="inputEmail" value="@player.PlayerEmail">
                                 </div>
                             </div>
-
                             <div class="form-group">
                                 <label for="inputUsername" class="col-sm-2 control-label">Kullanıcı Adı</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputUsername" value="@player.PlayerUserName">
+                                    <input type="text" class="form-control" id="inputUsername" name="inputUsername" value="@player.PlayerUserName">
                                 </div>
                             </div>
+                            if (player.PlayerIsAdmin)
+                            {
+                                <div class="form-group">
+                                    <label for="inputPower" class="col-sm-2 control-label">Güç</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputPower" name="inputPower" value="@player.PlayerPower">
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputPosition" class="col-sm-2 control-label">Mevki</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" class="form-control" id="inputPosition" name="inputPosition" value="@player.PlayerPosition">
+                                    </div>
+                                </div>
+                            }
 
-                            <div class="form-group">
-                                <label for="inputPower" class="col-sm-2 control-label">Güç</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="inputPower" value="@player.PlayerPower">
-                                </div>
-                            </div>
                             <div class="form-group">
                                 <label for="inputPassword" class="col-sm-2 control-label">Şifreniz</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputPassword" value="@player.PlayerPassword">
+                                    <input type="password" class="form-control" id="inputPassword" name="inputPassword" value="@player.PlayerPassword">
                                 </div>
                             </div>
                             <div class="form-group">
                                 <label for="inputRePassword" class="col-sm-2 control-label">Şifreniz Tekrar</label>
                                 <div class="col-sm-10">
-                                    <input type="password" class="form-control" id="inputRePassword" value="@player.PlayerPassword">
+                                    <input type="password" class="form-control" id="inputRePassword" name="inputRePassword" value="@player.PlayerPassword">
                                 </div>
                             </div>
-                            @if (player.PlayerIsAdmin)
+                            if (player.PlayerIsAdmin)
                             {
                                 <div class="form-group" id="AdminOrStandart">
                                     <div class="col-sm-offset-2 col-sm-10">
                                         <div class="checkbox">
                                             <label>
-                                                <input type="checkbox" checked="checked" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
+                                                <input type="checkbox" checked="checked" id="playerAdmin" name="playerAdmin" class="minimal-red"> Admin @*<a href="#">terms and conditions</a>*@
                                             </label>
                                         </div>
                                     </div>
@@ -113,7 +124,6 @@
                                     </div>
                                 </div>
                             }
-
                             <div class="form-group">
 
                                 <label for="File" class="col-sm-2 control-label">Profil Fotoğrafı Seçiniz</label>
@@ -122,13 +132,20 @@
                                 </div>
 
                             </div>
-
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-primary">Güncelle</button>
+                                    <button type="submit" id="btnEdit" class="btn btn-primary">Güncelle</button>
                                 </div>
                             </div>
-                        </form>
+                        }
+
+                        <div class="form-group">
+
+                            <div class="col-sm-12" id="result">
+
+                            </div>
+                        </div>
+
                     </div>
                     <!-- /.tab-pane -->
                 </div>
@@ -191,6 +208,34 @@
     $(document).ready(function() {
 
 
+
+        $('#btnEdit').click(function () {
+
+            var player = {
+                Email: $('#inputEmail').val(),
+                Name: $('#inputName').val(),
+                Surname: $('#inputSurname').val(),
+                Power: $('#inputPower').val(),
+                Password: $('#inputPassword').val(),
+                RePassword: $('#inputRePassword').val(),
+                Username: $('#inputUsername').val(),
+                Admin: $('#playerAdmin').val(),
+                Position: $('#inputPosition').val()
+            }
+
+            $.ajax({
+                url: 'Player/EditPlayer',
+                dataType: 'json',
+                type: 'post',
+                contentType: 'application/json',
+                data: player,
+                processData: false,
+            });
+
+
+
+        });
+
         $('#btngrant').click(function() {
 
             var txtusername = $("#txtusername").val();
@@ -223,7 +268,7 @@
             $('#AdminOrStandart').show();
         } else {
             $('#AdminOrStandart').hide();
-            $('#inputPower').attr('disabled', 'disabled');
+            //$('#inputPower').attr('disabled', 'disabled');
         }
 
 
