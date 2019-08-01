@@ -70,11 +70,13 @@ namespace RandomSquadCreater.UI.Controllers
             {
                 Session["user"] = service.GetPlayer(email);
                 Log.Info(service.GetPlayer(email).PlayerName + " " + service.GetPlayer(email).PlayerSurname + " sisteme giriş yaptı.");
-                return RedirectToAction("PlayerList", "Player");
+                return Json(new { Result = true });
             }
             else
             {
-                return RedirectToAction("/Login");
+                //ToastrService.AddToUserQueue(new Toastr(message: "Başarısız Giriş", type: ToastrType.Error));
+                //return RedirectToAction("/Login");
+                return Json(new { Result = false });
             }
         }
         public ActionResult Register()
@@ -92,18 +94,22 @@ namespace RandomSquadCreater.UI.Controllers
             player.PlayerUserName = formCollection["UserName"];
             player.PlayerEmail = formCollection["Email"];
             player.PlayerPassword = formCollection["Password"];
-            player.PlayerPosition = formCollection["Positions"];
+            player.PlayerPosition = formCollection["Position"];
             player.PlayerPower = Convert.ToInt32(formCollection["Power"]);
             player.PlayerIsAdmin = false;
+            player.PlayerLastLoginTime=DateTime.Now;
+            player.PlayerVoteDate=DateTime.Now;
 
             if (service.SavePlayer(player))
             {
                 Log.Info(player.PlayerName + " " + player.PlayerSurname + " sisteme kayıt oldu.");
-                return RedirectToAction("PlayerList", "Player");
+                //return RedirectToAction("PlayerList", "Player");
+                return Json(new { Result = true });
             }
             else
             {
-                return RedirectToAction("Register", "Home");
+                return Json(new { Result = false });
+                //return RedirectToAction("Register", "Home");
             }
         }
 
@@ -137,7 +143,7 @@ namespace RandomSquadCreater.UI.Controllers
         public ActionResult ResetPassword(FormCollection formCollection)
         {
             string newPassword = System.Guid.NewGuid().ToString("N").Remove(8);
-            string email = formCollection["reemail"];
+            string email = formCollection["email"];
 
 
             Player player = service.GetPlayer(email);
@@ -162,14 +168,14 @@ namespace RandomSquadCreater.UI.Controllers
 
                 sendMail.SendMails(from, password, email, "Şifre Sıfırlama", message.ToString());
                 Log.Info(player.PlayerName + " " + player.PlayerSurname + "'a şifre sıfırlamak için bilgi maili gönderildi.");
+                return Json(new { Result = true });
             }
             catch (Exception e)
             {
                 Log.Error(e.Message);
+                return Json(new { Result = false });
             }
-
-
-            return RedirectToAction("Login", "Home");
+  
         }
 
     }

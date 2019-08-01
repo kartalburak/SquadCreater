@@ -14,7 +14,7 @@
             <div class="box-header with-border">
                 <h3 class="box-title">Oyuncu Kayıt</h3>
             </div>
-            <form role="form" method="post" action="Register">
+            <form role="form">
                 <div class="box-body">
                     <div class="form-group">
                         <label for="Name">Adınız</label>
@@ -28,17 +28,17 @@
                     <label>Email adres</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" name="Email" class="form-control" placeholder="Email bilginizi giriniz">
+                        <input type="email" name="Email" id="Email" class="form-control" placeholder="Email bilginizi giriniz">
                     </div><br />
                     <div class="form-group">
                         <label for="Power">Güç</label>
-                        <input type="number" class="form-control" id="exampleInputPower" name="Power" placeholder="Tahmini güç değerinizi giriniz">
+                        <input type="text" class="form-control" id="Power" name="Power" placeholder="Tahmini güç değerinizi giriniz">
                     </div>
 
                     <label>Kullanıcı Adı</label>
                     <div class="input-group">
                         <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" name="Username" placeholder="Kullanıcı Adınızı Giriniz">
+                        <input type="text" class="form-control" id="Username" name="Username" placeholder="Kullanıcı Adınızı Giriniz">
                     </div>
                     <div class="form-group">
                         <label for="Password">Şifre</label>
@@ -46,7 +46,7 @@
                     </div>
                     <div class="form-group">
                         <label>Mevki Seçiniz</label>
-                        <select name="Positions" class="form-control">
+                        <select name="Positions" id="Positions" class="form-control">
                             <option value="GoalKeeper">GoalKeeper</option>
                             <option value="Deffence">Deffence</option>
                             <option value="MidField">MidField</option>
@@ -58,11 +58,11 @@
                         <input type="file" name="File" id="File">
                         @*<p class="help-block">Profil fotoğrafı seçiniz</p>*@
                     </div>
-                  
+
                 </div>
                 <!-- /.box-body -->
                 <div class="box-footer">
-                    <button type="submit" name="btnregister" id="btnregister" class="btn btn-primary">Kaydet</button>
+                    <button type="button" name="btnregister" id="btnregister" class="btn btn-primary">Kaydet</button>
                 </div>
             </form>
         </div>
@@ -72,12 +72,12 @@
     </div>
 </div>
 
-
+<script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
 <script type="text/javascript">
 
 
     $(document).ready(function () {
-        $("#btnregister").click(function() {
+        $("#btnregister").click(function () {
             var player = {
                 Email: $('#Email').val(),
                 Name: $('#Name').val(),
@@ -85,27 +85,34 @@
                 Power: $('#Power').val(),
                 Position: $('#Positions').val(),
                 Password: $('#Password').val(),
-                Username: $('#Username').val(),              
-                
-            }
+                Username: $('#Username').val()
 
+            };
+            var uri = 'http://localhost:64579/Home/Register';
             $.ajax({
-                url: 'Home/Register',
+                url: uri,
                 dataType: 'json',
-                type: 'post',
-                contentType: 'application/json',
+                method: 'post',
                 data: player,
-                processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(JSON.stringify(data));
+                cache: false,
+                success: function (data) {
+                    if (data.Result == true) {
+                        toastr.info("Yeni Oyuncu kaydedildi. Giriş yapabilirsiniz...");
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:64579/Home/Login';
+                        },
+                            2000);
+                    } else {
+                        toastr.error("Kayıt başarısız!");
+                    }
                 },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                error: function (errorThrown) {
+                    toastr.error("Kayıt başarısız! Hata: " + errorThrown);
                 }
             });
         });
 
-        $("#divradio input:radio").
+       
 
 
 

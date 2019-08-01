@@ -1,4 +1,5 @@
 ﻿@using RandomSquadCreater.Core
+@using RandomSquadCreater.UI.Controllers
 
 <!DOCTYPE html>
 <html>
@@ -8,26 +9,15 @@
     <title>AdminLTE 2 | General Form Elements</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/css/bootstrap.min.css">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/Ionicons/css/ionicons.min.css">
-    <!-- Theme style -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-    folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/skins/_all-skins.min.css">
     <link href="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
+
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     @{
@@ -375,12 +365,12 @@
                             <a href="~/Player/ScoreList">
                                 <i class="fa fa-th"></i> <span>Ortalama Puan Listesi</span>
                                 @*<span class="pull-right-container">
-                                    <small class="label pull-right bg-green">new</small>
-                                </span>*@
+                                        <small class="label pull-right bg-green">new</small>
+                                    </span>*@
                             </a>
                         </li>
                     }
-                   
+
                     <li>
                         <a href="~/Home/Index">
                             <i class="fa fa-th"></i> <span>Puan Takip Listesi</span>
@@ -432,67 +422,141 @@
 
         <div class="control-sidebar-bg"></div>
     </div>
-    <!-- ./wrapper -->
-    <!-- jQuery 3 -->
-    <script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
-    <!-- Bootstrap 3.3.7 -->
-    <script src="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <!-- FastClick -->
-    <script src="~/Content/AdminLTE-2.4.5/bower_components/fastclick/lib/fastclick.js"></script>
-    <!-- AdminLTE App -->
-    <script src="~/Content/AdminLTE-2.4.5/dist/js/adminlte.min.js"></script>
-    <!-- AdminLTE for demo purposes -->
-    <script src="~/Content/AdminLTE-2.4.5/dist/js/demo.js"></script>
+
+
+
+
+    @*@ProcessToastrs()*@
+
+    @*@RenderSection("_Scripts", false)*@
+
+
+
+
 </body>
 </html>
-
 <script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+
+<script src="~/Content/AdminLTE-2.4.5/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/dist/js/adminlte.min.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/dist/js/demo.js"></script>
+
 <script src="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
 <script src="/signalr/hubs" type="text/javascript"></script>
+
+
+
+<script>
+
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.timeOut = 0;@* 0 olunca kendiliğinden kapanmıyor.*@
+    @*toastr.options.escape.Html = false;   html'i gösterme *@
+
+    @* toastr.options.onShown=function() { console.log('Hello'); }
+    toastr.options.onHidden=function() { console.log('goodbye'); }
+    toastr.options.onclick=function() { console.log('clicked'); }
+    toastr.options.onCloseClick=function() { console.log('close button clicked'); }*@
+</script>
+
+
 <script type="text/javascript">
 
 
-    $(document).ready(function() {
-        $('#search-btn').click(function() {
-
-            var inputText = $('#randomPlayer').val();
 
 
-            $.ajax({
-                url: 'Player/PlayerListByKey',
-                dataType: 'json',
-                type: 'post',
-                cache:false,
-                contentType: 'application/json',
-                data:JSON.stringify({ "key": inputText }),
-                processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(JSON.stringify(data));
-                    @{
+             $(document).ready(function() {
+                 $('#search-btn').click(function() {
+
+                     var inputText = $('#randomPlayer').val();
+
+
+                     $.ajax({
+                         url: 'Player/PlayerListByKey',
+                         dataType: 'json',
+                         type: 'post',
+                         cache:false,
+                         contentType: 'application/json',
+                         data:JSON.stringify({ "key": inputText }),
+                         processData: false,
+                         success: function (data, textStatus, jQxhr) {
+                             $('#response pre').html(JSON.stringify(data));
+                             @{
                         Session["Players"] = null;
                     }
-                },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
-                }
-            });
+                         },
+                         error: function (jqXhr, textStatus, errorThrown) {
+                             console.log(errorThrown);
+                         }
+                     });
 
-        });
+                 });
 
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
+             });
 </script>
 
+
+@helper ProcessToastrs()
+{
+    List<(DateTime Date, string SessionId, Toastr Toastr)> toastrs = ToastrService.ReadAndRemoveUserQueue();
+    if (toastrs != null && toastrs.Count > 0)
+    {
+        foreach (var item in toastrs)
+        {
+            @*@:toastr.success('@item.Toastr.Message','@item.Toastr.Title')*@
+            ShowToastr(item.Toastr);
+        }
+
+
+    }
+}
+
+@helper ShowToastr(Toastr item)
+{
+    switch (item.Type)
+    {
+        case ToastrType.Info:
+            @ToastrInfo(item.Message, item.Title)
+            break;
+        case ToastrType.Success:
+            @ToastrSuccess(item.Message, item.Title)
+            break;
+        case ToastrType.Warning:
+            @ToastrWarning(item.Message, item.Title)
+            break;
+        case ToastrType.Error:
+            @ToastrError(item.Message, item.Title)
+            break;
+        default:
+            @ToastrInfo(item.Message, item.Title)
+            break;
+    }
+}
+
+@helper ToastrInfo(string message, string title)
+{
+    <script>
+        toastr.info('@message', '@title');
+    </script>
+}
+@helper ToastrWarning(string message, string title)
+{
+    <script>
+        toastr.warning('@message', '@title');
+    </script>
+}
+@helper ToastrSuccess(string message, string title)
+{
+    <script>
+        toastr.success('@message', '@title');
+    </script>
+}
+@helper ToastrError(string message, string title)
+{
+    <script>
+        toastr.error('@message', '@title');
+    </script>
+}

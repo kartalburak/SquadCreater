@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Script.Serialization;
 
 namespace RandomSquadCreater.Api.Models
 {
     public class AppGlobal
     {
-        SquadContext _context=new SquadContext();
+        SquadContext _context = new SquadContext();
 
-        public List<string> GetMatchRoster()
+        public List<Player> GetMatchRoster()
         {
             List<string> result = new List<string>();
             List<Player> matchRoster = new List<Player>();
-            List<Player> players = _context.Player.Where(x => x.PlayerIsComing == true).ToList(); 
+            List<Player> players = _context.Player.Where(x => x.PlayerIsComing == true).ToList();
 
             if (players.Where(x => x.PlayerPosition == "Forward").Count() == 2)
             {
@@ -44,42 +42,33 @@ namespace RandomSquadCreater.Api.Models
                 result.Add("Forvetiniz bulunmamaktadır.");
             }
 
+            
+            return matchRoster;
 
-
-            List<string> matchPlayerRoster = AppGlobal.ConvertListToJson(matchRoster);
-
-            if (matchPlayerRoster.Count == 14)
-            {
-                return matchPlayerRoster;
-            }
-            else
-            {
-                return result;
-            }
         }
 
-        public static List<string> ConvertListToJson(List<Score> objects)
+        public List<string> ConvertListToJson(List<Score> scores)
         {
 
             List<string> result = new List<string>();
-            foreach (var item in objects)
+            foreach (var item in scores)
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
-                var jsonObjects = serializer.Serialize(objects);
+                var jsonObjects = serializer.Serialize(scores);
                 result.Add(jsonObjects);
             }
 
             return result;
         }
 
-        public static List<string> ConvertListToJson(List<Player> objects)
+        public List<string> ConvertListToJson(List<Player> players)
         {
 
             List<string> result = new List<string>();
-            foreach (var item in objects)
+            foreach (var item in players)
             {
                 JavaScriptSerializer serializer = new JavaScriptSerializer();
-                var jsonObjects = serializer.Serialize(objects);
+                var jsonObjects = serializer.Serialize(players);
                 result.Add(jsonObjects);
             }
 

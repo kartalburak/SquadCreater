@@ -1,5 +1,5 @@
 ﻿@model RandomSquadCreater.UI.Models.LoginModel
-
+@using RandomSquadCreater.UI.Controllers
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/plugins/iCheck/square/blue.css">
-
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
@@ -31,7 +31,7 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <p class="login-box-msg"></p>
-            <form action="Login" method="post">
+            <form>
                 <div class="form-group has-feedback">
                     <input type="email" name="email" id="email" @*value="@email"*@ class="form-control" placeholder="Email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -50,7 +50,7 @@
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" id="btnlogin" name="btnlogin" class="btn btn-primary btn-block btn-flat">Giriş Yap</button>
+                        <button type="button" id="btnlogin" name="btnlogin" class="btn btn-primary btn-block btn-flat">Giriş Yap</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -71,20 +71,17 @@
                     </button>
                     <h4 class="modal-title">Şifre Sıfırlama İşlemleri</h4>
                 </div>
-                @using (Html.BeginForm("ResetPassword","Home",FormMethod.Post))
-                {                    
+                @using (Html.BeginForm())
+                {
                     <div class="modal-body">
                         <div class="form-group has-feedback">
                             <input type="email" name="reemail" id="reemail" class="form-control" placeholder="Email bilginizi giriniz">
                             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                         </div>
-                        <div id="messages">
-
-                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Kapat</button>
-                        <button type="submit" id="btnSend" name="btnSend" class="btn btn-primary">Gönder</button>
+                        <button type="button" id="btnSend" name="btnSend" class="btn btn-primary">Gönder</button>
                     </div>
 
                 }
@@ -98,6 +95,7 @@
 <script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
 <script src="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="~/Content/AdminLTE-2.4.5/plugins/iCheck/icheck.min.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
 
 
 <script type="text/javascript">
@@ -108,19 +106,29 @@
 
     $(document).ready(function () {
         $("#btnlogin").click(function () {
+
+            var uri = 'http://localhost:64579/Home/Login';
             $.ajax({
-                url: 'Home/Login',
+                url: uri,
                 dataType: 'json',
-                type: 'post',
-                async: false,
                 contentType: 'application/json',
-                data: JSON.stringify({ "email": $('#email').val(), "password": $('#password').val(), "checkbox": $('#checkbox').val() }),
                 processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(JSON.stringify(data));
+                method: 'post',
+                data: JSON.stringify({ "email": $('#email').val(), "password": $('#password').val(), "checkbox": $('#checkbox').val() }),
+                success: function (data) {
+
+                    if (data.Result == true) {
+                        toastr.warning("Giriş yapılıyor.");
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:64579/Player/PlayerList';
+                        },
+                            2000);
+                    } else {
+                        toastr.error("Giriş başarısız! Bilgilerinizi kontrol ediniz.");
+                    }
                 },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                error: function () {
+                    toastr.error("Giriş başarısız! Bilgilerinizi kontrol ediniz.");
                 }
             });
 
@@ -130,21 +138,28 @@
         $("#btnSend").click(function () {
 
             var email = $('#reemail').val();
-            
 
+            var uri = 'http://localhost:64579/Home/ResetPassword';
             $.ajax({
-                url: 'Home/ResetPassword',
+                url: uri,
                 dataType: 'json',
                 type: 'post',
-                async: false,
-                contentType: 'application/json',
-                data: JSON.stringify({ "email": email }),
-                processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(JSON.stringify(data));
+                cache: false,
+                data: { "email": email },
+                success: function (data) {
+
+                    if (data.Result == true) {
+                        toastr.warning("Bilgi mailiniz gönderildi. Mail kutunuzu kontrol ediniz.");
+                        setTimeout(function () {
+                                window.location.href = 'http://localhost:64579/Home/Login';
+                            },
+                            2000);
+                    } else {
+                        toastr.error("Mail Gönderilemedi! Bilgilerinizi kontrol ediniz.");
+                    }
                 },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                error: function (errorThrow) {
+                    toastr.error("Mail Gönderilemedi! Bilgilerinizi kontrol ediniz. Hata: "+errorThrow);
                 }
             });
 
@@ -162,8 +177,6 @@
         });
     });
 </script>
-
-
 
 
 

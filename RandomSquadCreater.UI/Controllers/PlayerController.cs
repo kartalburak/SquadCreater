@@ -171,11 +171,18 @@ namespace RandomSquadCreater.UI.Controllers
         {
 
             string key = formCollection["randomPlayer"];
+            if (key != null && key.Length > 0)
+            {
+                Session["Players"] = service.GetAllPlayer()
+                    .Where(x => x.PlayerName.ToLower().Contains(key.ToLower()) || x.PlayerSurname.ToLower().Contains(key.ToLower()))
+                    .ToList();
+            }
+            else
+            {
+                Session["Players"] = service.GetAllPlayer();
+            }
 
 
-            Session["Players"] = service.GetAllPlayer()
-                .Where(x => x.PlayerName.ToLower().Contains(key.ToLower()) || x.PlayerSurname.ToLower().Contains(key.ToLower()))
-                .ToList();
 
 
 
@@ -203,37 +210,42 @@ namespace RandomSquadCreater.UI.Controllers
             {
                 service.UpdatePlayer(player);
                 Log.Info(player.PlayerName + " " + player.PlayerSurname + "'a yetki verildi.");
+                return Json(new { Result = true });
             }
             catch (Exception e)
             {
                 Log.Error(e.Message);
-                throw;
+                return Json(new { Result = false });
+                
             }
 
-            return RedirectToAction("PlayerProfile", "Player");
+            
+            //return RedirectToAction("PlayerProfile", "Player");
         }
 
-        public ActionResult EditPlayer(FormCollection formCollection)
+        [HttpPost]
+        public ActionResult PlayerProfile(FormCollection formCollection)
         {
 
-            if (formCollection["inputPassword"] == formCollection["inputRePassword"])
+            if (formCollection["Password"] == formCollection["RePassword"])
             {
-                Player player = service.GetPlayer(formCollection["inputEmail"]);
+                Player player = service.GetPlayer(formCollection["Email"]);
 
-                player.PlayerUserName = formCollection["inputUsername"];
-                player.PlayerName = formCollection["inputName"];
-                player.PlayerSurname = formCollection["inputSurname"];
-                player.PlayerPassword = formCollection["inputPassword"];
-                player.PlayerEmail = formCollection["inputEmail"];
-                player.PlayerPower = Convert.ToInt32(formCollection["inputPower"]);
+                player.PlayerUserName = formCollection["Username"];
+                player.PlayerName = formCollection["Name"];
+                player.PlayerSurname = formCollection["Surname"];
+                player.PlayerPassword = formCollection["Password"];
+                player.PlayerEmail = formCollection["Email"];
+                player.PlayerPower = Convert.ToInt32(formCollection["Power"]);
                 player.PlayerIsAdmin = formCollection["playerAdmin"] == null ? false : true;
-                player.PlayerPosition = formCollection["inputPosition"].Contains("GoalKeeper") || formCollection["inputPosition"].Contains("Deffence") || formCollection["inputPosition"].Contains("MidField") || formCollection["inputPosition"].Contains("Forward") ? formCollection["inputPosition"] : null;
+                player.PlayerPosition = formCollection["Position"].Contains("GoalKeeper") || formCollection["Position"].Contains("Deffence") || formCollection["Position"].Contains("MidField") || formCollection["Position"].Contains("Forward") ? formCollection["Position"] : null;
 
                 try
                 {
                     service.UpdatePlayer(player);
                     Session["user"] = player;
                     Log.Info(player.PlayerName + " " + player.PlayerSurname + "'ın bilgileri güncellendi.");
+                    //ToastrService.AddToUserQueue(new Toastr("Oyuncu bilgileri güncellendi."));
                 }
                 catch (Exception e)
                 {
@@ -244,8 +256,49 @@ namespace RandomSquadCreater.UI.Controllers
 
 
 
-            return RedirectToAction("PlayerProfile", "Player");
+            //return RedirectToAction("PlayerProfile", "Player");
+            return View(Session["user"] as Player);
         }
+
+
+        [HttpPost]
+        public JsonResult AjaxPlayerProfile(FormCollection formCollection)
+        {
+
+            if (formCollection["Password"] == formCollection["RePassword"])
+            {
+                Player player = service.GetPlayer(formCollection["Email"]);
+
+                if (player.PlayerIsAdmin)
+                {
+                    player.PlayerPower = Convert.ToInt32(formCollection["Power"]);
+                    player.PlayerIsAdmin = formCollection["playerAdmin"] == null ? false : true;
+                    player.PlayerPosition = formCollection["Position"].Contains("GoalKeeper") || formCollection["Position"].Contains("Deffence") || formCollection["Position"].Contains("MidField") || formCollection["Position"].Contains("Forward") ? formCollection["Position"] : null;
+                }
+
+                player.PlayerUserName = formCollection["Username"];
+                player.PlayerName = formCollection["Name"];
+                player.PlayerSurname = formCollection["Surname"];
+                player.PlayerPassword = formCollection["Password"];
+                player.PlayerEmail = formCollection["Email"];
+                
+                
+                try
+                {
+                    service.UpdatePlayer(player);
+                    Session["user"] = player;
+                    Log.Info(player.PlayerName + " " + player.PlayerSurname + "'ın bilgileri güncellendi.");
+                    //ToastrService.AddToUserQueue(new Toastr("Oyuncu bilgileri güncellendi."));
+                }
+                catch (Exception e)
+                {
+                    Log.Error(e.Message);
+                }
+            }
+
+            return Json(new { Result = true  });
+        }
+
 
     }
 }
