@@ -1,78 +1,178 @@
 ﻿
 @{
     ViewBag.Title = "Register";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    //Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = null;
 }
+<link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/css/bootstrap.min.css">
+<link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/Ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/AdminLTE.min.css">
+<link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/skins/_all-skins.min.css">
+<link href="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+<link href="~/Content/toastr.min.css" rel="stylesheet" />
 
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 2 | General Form Elements</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/Ionicons/css/ionicons.min.css">
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/AdminLTE.min.css">
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/dist/css/skins/_all-skins.min.css">
+    <link href="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link href="~/Content/toastr.min.css" rel="stylesheet" />
 
-<div class="row">
-    <div class="col-md-1">
+</head>
+<body class="hold-transition skin-blue sidebar-mini sidebar-collapse">
 
-    </div>
-    <div class="col-md-6">
-        <div class="box box-primary">
-            <div class="box-header with-border">
-                <h3 class="box-title">Oyuncu Kayıt</h3>
-            </div>
-            <form role="form">
-                <div class="box-body">
-                    <div class="form-group">
-                        <label for="Name">Adınız</label>
-                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Adınızı giriniz">
-                    </div>
-                    <div class="form-group">
-                        <label for="Surname">Soyadınız</label>
-                        <input type="text" class="form-control" id="Surname" name="Surname" placeholder="Soyadınızı giriniz">
-                    </div>
-
-                    <label>Email adres</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-                        <input type="email" name="Email" id="Email" class="form-control" placeholder="Email bilginizi giriniz">
-                    </div><br />
-                    <div class="form-group">
-                        <label for="Power">Güç</label>
-                        <input type="text" class="form-control" id="Power" name="Power" placeholder="Tahmini güç değerinizi giriniz">
-                    </div>
-
-                    <label>Kullanıcı Adı</label>
-                    <div class="input-group">
-                        <span class="input-group-addon">@@</span>
-                        <input type="text" class="form-control" id="Username" name="Username" placeholder="Kullanıcı Adınızı Giriniz">
-                    </div>
-                    <div class="form-group">
-                        <label for="Password">Şifre</label>
-                        <input type="password" class="form-control" id="Password" name="Password" placeholder="Şifre">
-                    </div>
-                    <div class="form-group">
-                        <label>Mevki Seçiniz</label>
-                        <select name="Positions" id="Positions" class="form-control">
-                            <option value="GoalKeeper">GoalKeeper</option>
-                            <option value="Deffence">Deffence</option>
-                            <option value="MidField">MidField</option>
-                            <option value="Forward">Forward</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label for="File">Profil Fotoğrafı Seçiniz</label>
-                        <input type="file" name="File" id="File">
-                        @*<p class="help-block">Profil fotoğrafı seçiniz</p>*@
-                    </div>
+    <div class="wrapper">
+        <header class="main-header">
+            <!-- Logo -->
+            <a href="#" class="logo">
+                <!-- mini logo for sidebar mini 50x50 pixels -->
+                <span class="logo-mini"><b>S</b>CR</span>
+                <!-- logo for regular state and mobile devices -->
+                <span class="logo-lg"><b>Squad</b>CRT</span>
+            </a>
+            <!-- Header Navbar: style can be found in header.less -->
+            <nav class="navbar navbar-static-top">
+                <!-- Sidebar toggle button-->
+                <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <div class="navbar-custom-menu">
 
                 </div>
-                <!-- /.box-body -->
-                <div class="box-footer">
-                    <button type="button" name="btnregister" id="btnregister" class="btn btn-primary">Kaydet</button>
+            </nav>
+        </header>
+
+        <div class="content-wrapper">
+            <section class="content">
+                <div class="row">
+                    <div class="col-md-1">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box box-primary">
+                            <div class="box-header with-border">
+                                <h3 class="box-title">Oyuncu Kayıt</h3>
+                            </div>
+                            <form role="form" >
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="Name">Adınız</label>
+                                        <input type="text" class="form-control" id="Name" name="Name" placeholder="Adınızı giriniz">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Surname">Soyadınız</label>
+                                        <input type="text" class="form-control" id="Surname" name="Surname" placeholder="Soyadınızı giriniz">
+                                    </div>
+
+                                    <label>Email adres</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                        <input type="email" name="Email" id="Email" class="form-control" placeholder="Email bilginizi giriniz">
+                                    </div><br />
+                                    <div class="form-group">
+                                        <label for="Power">Güç</label>
+                                        <input type="text" class="form-control" id="Power" name="Power" placeholder="Tahmini güç değerinizi giriniz">
+                                    </div>
+
+                                    <label>Kullanıcı Adı</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon">@@</span>
+                                        <input type="text" class="form-control" id="Username" name="Username"  placeholder="Kullanıcı Adınızı Giriniz" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Password">Şifre</label>
+                                        <input type="password" class="form-control" id="Password" name="Password"  placeholder="Şifre">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mevki Seçiniz</label>
+                                        <select name="Positions" id="Positions" class="form-control">
+                                            <option value="GoalKeeper">GoalKeeper</option>
+                                            <option value="Deffence">Deffence</option>
+                                            <option value="MidField">MidField</option>
+                                            <option value="Forward">Forward</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="File">Profil Fotoğrafı Seçiniz</label>
+                                        <input type="file" name="File" id="File">
+                                        @*<p class="help-block">Profil fotoğrafı seçiniz</p>*@
+                                    </div>
+
+                                </div>
+                                <!-- /.box-body -->
+                                <div class="box-footer">
+                                    <button type="button" name="btnregister" id="btnregister" class="btn btn-primary">Kaydet</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+
+                    </div>
                 </div>
-            </form>
+            </section>
         </div>
-    </div>
-    <div class="col-md-5">
+        <footer class="main-footer">
+            @*<div class="pull-right hidden-xs">
+                    <b>Version</b> 2.4.0
+                </div>*@
+            <strong>Copyright &copy; 2019 <a href="https://btpro.net/main">Btpro Squad Creater</a>.</strong> Tüm hakları saklıdır.
+        </footer>
 
+        
     </div>
-</div>
+</body>
+</html>
+
+
+
+
+
+
+
 
 <script src="~/Content/AdminLTE-2.4.5/bower_components/jquery/dist/jquery.min.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="~/Scripts/toastr.min.js"></script>
+
+<script src="~/Content/AdminLTE-2.4.5/bower_components/fastclick/lib/fastclick.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/dist/js/adminlte.min.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/dist/js/demo.js"></script>
+
+<script src="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
+<script src="/signalr/hubs" type="text/javascript"></script>
+
+
+
+<script>
+
+    toastr.options.preventDuplicates = false;
+    toastr.options.closeButton = true;
+    toastr.options.timeOut = 0;@* 0 olunca kendiliğinden kapanmıyor.*@
+    @*toastr.options.escape.Html = false;   html'i gösterme *@
+
+    @* toastr.options.onShown=function() { console.log('Hello'); }
+    toastr.options.onHidden=function() { console.log('goodbye'); }
+    toastr.options.onclick=function() { console.log('clicked'); }
+    toastr.options.onCloseClick=function() { console.log('close button clicked'); }*@
+</script>
+
 <script type="text/javascript">
 
 
@@ -96,7 +196,7 @@
                 data: player,
                 cache: false,
                 success: function (data) {
-                    if (data.Result == true) {
+                    if (data.Result == true) {                        
                         toastr.info("Yeni Oyuncu kaydedildi. Giriş yapabilirsiniz...");
                         setTimeout(function () {
                             window.location.href = 'http://localhost:64579/Home/Login';
@@ -112,7 +212,7 @@
             });
         });
 
-       
+
 
 
 

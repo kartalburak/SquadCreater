@@ -1,12 +1,11 @@
 ﻿using Microsoft.AspNet.SignalR;
 using RandomSquadCreater.Core;
+using RandomSquadCreater.UI.Infrastructure;
 using RandomSquadCreater.UI.ServiceObject;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using RandomSquadCreater.UI.Models;
-using RandomSquadCreater.UI.Infrastructure;
 
 namespace RandomSquadCreater.UI.Hubs
 {
@@ -62,18 +61,15 @@ namespace RandomSquadCreater.UI.Hubs
                     try
                     {
                         service.UpdatePlayer(connectedPlayer);
-                        Log.Info(connectedPlayer.PlayerName+" "+connectedPlayer.PlayerSurname+" şu anda online.");
+                        Log.Info(connectedPlayer.PlayerName + " " + connectedPlayer.PlayerSurname + " şu anda online.");
+
                     }
                     catch (Exception e)
                     {
                         Log.Error(e.Message);
-                        throw;
                     }
-                   
+
                 }
-
-
-
             }
 
 
@@ -100,14 +96,14 @@ namespace RandomSquadCreater.UI.Hubs
             {
                 // Broad cast message
                 Clients.All.messageReceived(userName, message);
-                Log.Info(userName+" tüm kullanıcılara mesaj gönderdi.");
+                Log.Info(userName + " tüm kullanıcılara mesaj gönderdi.");
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
                 throw;
             }
-           
+
         }
 
         public void SendPrivateMessage(string toUserId, string message)
@@ -126,7 +122,7 @@ namespace RandomSquadCreater.UI.Hubs
                 // send to caller user
                 Clients.Caller.sendPrivateMessage(toUserId, fromUser.UserName, message);
             }
-           
+
         }
 
         public override Task OnDisconnected(bool stopCalled)

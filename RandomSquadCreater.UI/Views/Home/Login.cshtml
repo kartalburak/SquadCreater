@@ -118,11 +118,11 @@
                 success: function (data) {
 
                     if (data.Result == true) {
-                        toastr.warning("Giriş yapılıyor.");
+                        toastr.success("Giriş yapılıyor.");
                         setTimeout(function () {
                             window.location.href = 'http://localhost:64579/Player/PlayerList';
                         },
-                            2000);
+                            1000);
                     } else {
                         toastr.error("Giriş başarısız! Bilgilerinizi kontrol ediniz.");
                     }

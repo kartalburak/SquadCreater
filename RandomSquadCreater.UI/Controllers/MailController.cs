@@ -14,7 +14,10 @@ namespace RandomSquadCreater.UI.Controllers
         [ValidateInput(false)]
         public ActionResult SendMail()
         {
-
+            if (Session["user"] == null)
+            {
+                return RedirectToAction("Login");
+            }
 
             return View();
         }

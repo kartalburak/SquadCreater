@@ -36,6 +36,52 @@
                         @{
 
                             Player player = Session["user"] as Player;
+                            List<Player> players = ViewBag.GetAllPlayers;
+                            bool result = false;
+                            switch (player.PlayerPosition)
+                            {
+                                case "GoalKeeper":
+                                    int goalKeeperCount = players.Where(x => x.PlayerPosition == "GoalKeeper").Count();
+                                    if (goalKeeperCount < 2)
+                                    {
+                                        result = true;
+                                    }
+                                    break;
+
+                                case "Deffence":
+                                    int deffenceAndMidFieldCount = players.Where(x => x.PlayerPosition == "Deffence").Count() + players.Where(x => x.PlayerPosition == "MidField").Count();
+                                    if (deffenceAndMidFieldCount < 10)
+                                    {
+                                        result = true;
+                                    }
+                                    break;
+
+                                case "MidField":
+                                    int mid = players.Where(x => x.PlayerPosition == "MidField").Count();
+                                    int def = players.Where(x => x.PlayerPosition == "Deffence").Count();
+
+                                    int midFieldAndDeffenceCount = mid + def;
+                                    if (midFieldAndDeffenceCount < 10)
+                                    {
+                                        result = true;
+                                    }
+                                    break;
+
+                                case "Forward":
+                                    int forwardCount = players.Where(x => x.PlayerPosition == "Forward").Count();
+                                    if (forwardCount < 2)
+                                    {
+                                        result = true;
+                                    }
+                                    break;
+
+                                default:
+                                    result = false;
+                                    break;
+                            }
+
+
+
                         }
 
 
@@ -57,16 +103,26 @@
                                     @if (player.PlayerUserName == item.PlayerUserName)
                                     {
 
-                                        <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
+                                        <button type="submit" class="btn btn-warning" title="Kadro Doldu." onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
                                             Puan Ver
                                         </button>
 
                                     }
                                     else
                                     {
-                                        <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default">
-                                            Puan Ver
-                                        </button>
+                                        if (result == false)
+                                        {
+                                            <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
+                                                Puan Ver
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default">
+                                                Puan Ver
+                                            </button>
+                                        }
+
                                     }
 
 
@@ -74,18 +130,32 @@
 
                                 </td>
                                 <td>
+                                    @*pozisyon doluysa ilgili oyuncuya oy vermeyi kapat*@
+                                    @if (player.PlayerUserName != item.PlayerUserName)
+                                    {
 
-                                    @if (player.PlayerUserName == item.PlayerUserName)
-                                    {
-                                        <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info">
-                                            Oy Kullan
-                                        </button>
-                                    }
-                                    else
-                                    {
+
                                         <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info" disabled="disabled">
                                             Oy Kullan
                                         </button>
+
+
+                                    }
+                                    else
+                                    {
+                                        if (result == false)
+                                        {
+                                            <button type="button" class="btn btn-warning" title="Kadro Doldu." data-toggle="modal" data-target="#modal-info" disabled="disabled">
+                                                Oy Kullan
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal-info">
+                                                Oy Kullan
+                                            </button>
+                                        }
+
                                     }
                                 </td>
                                 @if (player.PlayerUserName == item.PlayerUserName)
@@ -128,7 +198,7 @@
                 <h4 class="modal-title">Puanlama Tablosu</h4>
             </div>
 
-            @using (Html.BeginForm("PlayerList", "Player", FormMethod.Post))
+            @using (Html.BeginForm())
             {
                 <div class="modal-body">
                     <input type="hidden" id="sender" name="sender" value="players">
@@ -146,7 +216,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-default pull-left" data-dismiss="modal">Kapat</button>
-                    <button type="submit" id="btnreply" name="btnreply" class="btn btn-primary">Kaydet</button>
+                    <button type="button" id="btnreply" name="btnreply" class="btn btn-primary">Kaydet</button>
                 </div>
             }
         </div>
@@ -165,7 +235,7 @@
             </div>
             @*<form name="myForm" controller="Player" action="Vote" method="post">*@
 
-            @using (Html.BeginForm("Vote", "Player", FormMethod.Post))
+            @using (Html.BeginForm())
             {
                 <div class="modal-body">
 
@@ -182,7 +252,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Kapat</button>
-                    <button type="submit" id="btnvote" name="btnvote" class="btn btn-outline">Oyunu Kullan</button>
+                    <button type="button" id="btnvote" name="btnvote" class="btn btn-outline">Oyunu Kullan</button>
                 </div>
 
             }
@@ -211,19 +281,27 @@
             var no = $("#divradio input:radio:checked").val();
 
             //alert(no);
-
+            var uri = 'http://localhost:64579/Player/Vote';
             $.ajax({
-                url: 'Player/Vote',
+                url: uri,
                 dataType: 'json',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify({ "myvote": no }),
-                processData: false,
+                method: 'post',
+                data: { "myvote": no },
                 success: function (data) {
-                    $('#response pre').html(JSON.stringify(data));
+                    if (data.Result == true) {
+                        toastr.warning("Oyunuz kaydediliyor.");
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:64579/Player/PlayerList';
+                        },
+                            2000);
+                    } else if (data.success == "timeout") {
+                        toastr.info("1 hafta içerisinde iki defa oy kullanamazsınız.");
+                    } else {
+                        toastr.error("Oyunuz kaydedilemedi.");
+                    }
                 },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log(textStatus, errorThrown);
+                error: function (errorThrown) {
+                    toastr.error("Oyunuz kaydedilemedi. Hata: " + errorThrown);
                 }
             });
         });
@@ -234,19 +312,29 @@
 
             var point = $('#point').val();
 
-
+            var uri = 'http://localhost:64579/Player/PlayerList';
             $.ajax({
-                url: 'Player/PlayerList',
+                url: uri,
                 dataType: 'json',
-                type: 'post',
-                contentType: 'application/json',
-                data: JSON.stringify({ "sender": sender, "point": point }),
-                processData: false,
-                success: function (data, textStatus, jQxhr) {
-                    $('#response pre').html(JSON.stringify(data));
+                method: 'post',
+                data: { "sender": sender, "point": point },
+                success: function (data) {
+                    if (data.Result == true) {
+                        toastr.warning("Oyuncuya verdiğiniz puan kaydediliyor.");
+                        setTimeout(function () {
+                            window.location.href = 'http://localhost:64579/Player/PlayerList';
+                        },
+                            2000);
+                    } else if (data.success == "timeout") {
+                        toastr.info("1 hafta içerisinde aynı oyuncuya iki defa puan veremezsiniz.");
+                    } else if (data.success == "isNumeric") {
+                        toastr.warning("Girilen değer sayı olmalıdır..");
+                    } else {
+                        toastr.error("Oyuncuya verilen puan kaydedilemedi.");
+                    }
                 },
-                error: function (jqXhr, textStatus, errorThrown) {
-                    console.log(errorThrown);
+                error: function (errorThrown) {
+                    toastr.error("Oyuncuya verilen puan kaydedilemedi. Hata: " + errorThrown);
                 }
             });
         });
@@ -254,15 +342,18 @@
     });
 
     function CheckValue() {
-        var point, text;
+        var point;
 
         point = document.getElementById("point").value;
         if (isNaN(point) || point < 1 || point > 100) {
-            text = "Geçersiz karakter girdiniz. 1 ile 100 arasında sayı giriniz.";
-        } else {
-            text = "";
+
+            toastr.warning("Geçersiz karakter girdiniz. 1 ile 100 arasında sayı giriniz.");
+            setTimeout(function () {
+                window.location.href = 'http://localhost:64579/Player/PlayerList';
+            },
+                1000);
         }
-        document.getElementById("message").innerHTML = text;
+
     }
 
 

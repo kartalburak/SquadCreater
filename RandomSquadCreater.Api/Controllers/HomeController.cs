@@ -1,16 +1,15 @@
-﻿using RandomSquadCreater.Api.Models;
-using System.Collections.Generic;
-using System.Web.Http;
+﻿using System.Web.Http;
+using RandomSquadCreater.Api.Models;
 
 
 namespace RandomSquadCreater.Api.Controllers
 {
     public class HomeController : ApiController
     {
-
-        public List<string> GetMatchRoster()
+        [System.Web.Http.HttpGet]
+        public IHttpActionResult GetMatchRoster()
         {
-            return new AppGlobal().ConvertListToJson(new AppGlobal().GetMatchRoster());
+            return Json(new AppGlobal().GetMatchRoster());
         }
 
 

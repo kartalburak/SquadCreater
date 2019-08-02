@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web.Script.Serialization;
+
 
 namespace RandomSquadCreater.Api.Models
 {
@@ -12,37 +14,52 @@ namespace RandomSquadCreater.Api.Models
         {
             List<string> result = new List<string>();
             List<Player> matchRoster = new List<Player>();
-            List<Player> players = _context.Player.Where(x => x.PlayerIsComing == true).ToList();
+            List<Player> comingPlayers = new List<Player>();
+            List<Player> players = _context.Player.Where(x => x.PlayerIsComing == true).ToList();//event date control 
 
-            if (players.Where(x => x.PlayerPosition == "Forward").Count() == 2)
+
+            foreach (var player in players)
             {
-                if (players.Where(x => x.PlayerPosition == "MidField").Count() + players.Where(x => x.PlayerPosition == "Deffence").Count() == 10)
+                if (player.PlayerVoteDate.HasValue)
                 {
-                    if (players.Where(x => x.PlayerPosition == "GoalKeeper").Count() == 2)
+                    if (DateTime.Now.Subtract(player.PlayerVoteDate.Value).TotalDays < 7)
                     {
-                        matchRoster.AddRange(players.Where(x => x.PlayerPosition == "GoalKeeper").ToList());
+                        comingPlayers.Add(player);
+                    }
+                }
+            }
+
+
+            if (comingPlayers.Where(x => x.PlayerPosition == "Forward").Count() == 2)
+            {
+
+                if (comingPlayers.Where(x => x.PlayerPosition == "MidField").Count() + comingPlayers.Where(x => x.PlayerPosition == "Deffence").Count() == 10)
+                {
+                    if (comingPlayers.Where(x => x.PlayerPosition == "GoalKeeper").Count() == 2)
+                    {
+                        matchRoster.AddRange(comingPlayers.Where(x => x.PlayerPosition == "GoalKeeper").ToList());
                     }
                     else
                     {
-                        matchRoster.AddRange(players.Where(x => x.PlayerPosition == "GoalKeeper").ToList());
+                        matchRoster.AddRange(comingPlayers.Where(x => x.PlayerPosition == "GoalKeeper").ToList());
                         result.Add("Kaleciniz bulunmamaktadır. ");
                     }
 
-                    matchRoster.AddRange(players.Where(x => x.PlayerPosition == "MidField").ToList());
-                    matchRoster.AddRange(players.Where(x => x.PlayerPosition == "Deffence").ToList());
+                    matchRoster.AddRange(comingPlayers.Where(x => x.PlayerPosition == "MidField").ToList());
+                    matchRoster.AddRange(comingPlayers.Where(x => x.PlayerPosition == "Deffence").ToList());
                 }
                 else
                 {
                     result.Add("Orta Saha ve Defans : Yeterli sayıda oyuncu yok. ");
                 }
-                matchRoster.AddRange(players.Where(x => x.PlayerPosition == "Forward").ToList());
+                matchRoster.AddRange(comingPlayers.Where(x => x.PlayerPosition == "Forward").ToList());
             }
             else
             {
                 result.Add("Forvetiniz bulunmamaktadır.");
             }
 
-            
+
             return matchRoster;
 
         }
