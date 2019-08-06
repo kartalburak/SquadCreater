@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "CreateEvent";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+    <div class="col-md-6">
+        <div class="box box-warning">
+            <div class="box-header">
+                <h3 class="box-title">Etkinlik Oluştur</h3>
+            </div>
+            <div class="box-body">
+
+
+                <div class="form-group">
+                    <label>Etkinlik Adı:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-dashboard"></i>
+                        </div>
+                        <input type="text" class="form-control">
+                    </div>
+                    <!-- /.input group -->
+                </div>
+
+
+                <!-- Date dd/mm/yyyy -->
+                <div class="form-group">
+                    <label>Etkinlik Tarihi:</label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar"></i>
+                        </div>
+                        <input type="text" class="form-control" data-inputmask="'alias': 'dd/mm/yyyy'" data-mask>
+                    </div>
+                    <!-- /.input group -->
+                </div>
+
+
+                <div class="form-group">
+                    <label>Etkinlik Kontenjanı</label>
+                    <select class="form-control select2" style="width: 100%;">
+                        <option selected="selected" value="14">14 Kişilik</option>
+                        <option value="7">7 Kişilik</option>
+
+                    </select>
+                </div>
+
+
+            </div>
+            <!-- /.box-body -->
+        </div>
+    </div>
+
+

@@ -7,6 +7,11 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+
+@{
+    Html.RenderPartial("CreateDashboard");   
+}
+
 <div class="row">
     <div class="col-xs-12">
         <div class="box">
@@ -26,7 +31,7 @@
                             @*<th>Geliyor mu?</th>*@
                             <th>Puanla</th>
                             <th>Oy Ver</th>
-                            <th>Sohbet Başlat</th>
+                            @*<th>Sohbet Başlat</th>*@
 
 
                         </tr>
@@ -110,18 +115,18 @@
                                     }
                                     else
                                     {
-                                        if (result == false)
-                                        {
-                                            <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
-                                                Puan Ver
-                                            </button>
-                                        }
-                                        else
-                                        {
-                                            <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default">
-                                                Puan Ver
-                                            </button>
-                                        }
+                                        @*if (result == false)
+                                            {
+                                                <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default" disabled="disabled">
+                                                    Puan Ver
+                                                </button>
+                                            }
+                                            else
+                                            {*@
+                                        <button type="submit" class="btn btn-default" onclick="SendParam('@item.PlayerName' + ' ' + '@item.PlayerSurname')" data-toggle="modal" data-target="#modal-default">
+                                            Puan Ver
+                                        </button>
+
 
                                     }
 
@@ -158,7 +163,7 @@
 
                                     }
                                 </td>
-                                @if (player.PlayerUserName == item.PlayerUserName)
+                                @*if (player.PlayerUserName == item.PlayerUserName)
                                 {
                                     <td style="padding-left: 50px"></td>
                                 }
@@ -166,16 +171,16 @@
                                 {
                                     <td style="padding-left: 50px">
 
-                                        @*@Html.ActionLink('<i class="fa fa-plus-circle"></i>', "Chat", new { Name = item.PlayerName + ' ' + item.PlayerSurname })*@
-                                        @*<a href="~/Home/Chat" id="btnchat" key="Request.QueryString['@item.PlayerName' + ' ' + '@item.PlayerSurname']">
+                                        @Html.ActionLink('<i class="fa fa-plus-circle"></i>', "Chat", new { Name = item.PlayerName + ' ' + item.PlayerSurname })
+                                        <a href="~/Home/Chat" id="btnchat" key="Request.QueryString['@item.PlayerName' + ' ' + '@item.PlayerSurname']">
                                                 <i class="fa fa-plus-circle"></i>
-                                            </a>*@
+                                            </a>
 
                                         <a href="@Url.Action("Chat", "Chat",new { Name = item.PlayerName + ' ' + item.PlayerSurname })">
                                             <i class="fa fa-plus-circle"></i>
                                         </a>
                                     </td>
-                                }
+                                }*@
                             </tr>
                         }
                     </tbody>

@@ -73,6 +73,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppGlobal.cs" />
+    <Compile Include="Core\Event.cs" />
     <Compile Include="Core\Mails.cs" />
     <Compile Include="Core\MessageDetail.cs" />
     <Compile Include="Core\Player.cs" />

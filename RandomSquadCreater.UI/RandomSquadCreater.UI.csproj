@@ -6784,6 +6784,8 @@
     <Content Include="Views\Player\PlayerProfile.cshtml" />
     <Content Include="Views\Home\UnAuthorized.cshtml" />
     <Content Include="Scripts\JQuery.min.js" />
+    <Content Include="Views\Player\CreateEvent.cshtml" />
+    <Content Include="Views\Player\CreateDashboard.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

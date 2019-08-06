@@ -17,7 +17,7 @@
     <link href="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
     <link href="~/Content/toastr.min.css" rel="stylesheet" />
-
+    <link rel="stylesheet" href="~/Content/AdminLTE-2.4.5/bower_components/select2/dist/css/select2.min.css">
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
     @{
@@ -49,205 +49,7 @@
                 </a>
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="~/Player/PlayerProfile">
-                                                <div class="pull-left">
-                                                    <img src="~/Content/AdminLTE-2.4.5/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Support Team
-                                                    <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
-                                        <li>
-                                            <a href="~/Player/PlayerProfile">
-                                                <div class="pull-left">
-                                                    <img src="~/Content/AdminLTE-2.4.5/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    AdminLTE Design Team
-                                                    <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="~/Player/PlayerProfile">
-                                                <div class="pull-left">
-                                                    <img src="~/Content/AdminLTE-2.4.5/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Developers
-                                                    <small><i class="fa fa-clock-o"></i> Today</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="~/Player/PlayerProfile">
-                                                <div class="pull-left">
-                                                    <img src="~/Content/AdminLTE-2.4.5/dist/img/user3-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Sales Department
-                                                    <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="~/Player/PlayerProfile">
-                                                <div class="pull-left">
-                                                    <img src="~/Content/AdminLTE-2.4.5/dist/img/user4-128x128.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>
-                                                    Reviewers
-                                                    <small><i class="fa fa-clock-o"></i> 2 days</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-warning text-yellow"></i> Very long description here that may not fit into the
-                                                page and may cause design problems
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-red"></i> 5 new members joined
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                                            </a>
-                                        </li>
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-user text-red"></i> You changed your username
-                                            </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-flag-o"></i>
-                                <span class="label label-danger">9</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Design some buttons
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Create a nice theme
-                                                    <small class="pull-right">40%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-green" style="width: 40%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">40% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Some task I need to do
-                                                    <small class="pull-right">60%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-red" style="width: 60%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">60% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>
-                                                    Make beautiful transitions
-                                                    <small class="pull-right">80%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-yellow" style="width: 80%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">80% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- User Account: style can be found in dropdown.less -->
+                      
                         <li class="dropdown user user-menu">
                             <a href="~/Player/PlayerProfile" class="dropdown-toggle" data-toggle="dropdown">
                                 <img src="~/Content/AdminLTE-2.4.5/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
@@ -259,25 +61,9 @@
                                     <img src="~/Content/AdminLTE-2.4.5/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
                                     <p>
                                         @name - Btpro Stuff
-                                        <small>Member since Nov. 2012</small>
+                                        <small></small>
                                     </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
+                                </li>                              
                                 <li class="user-footer">
                                     <div class="pull-left">
                                         <a href="~/Player/PlayerProfile" class="btn btn-default btn-flat">Profile</a>
@@ -353,10 +139,10 @@
 
                     <li>
                         <a href="~/Player/PlayerList">
-                            <i class="fa fa-th"></i> <span>Oyuncu Listesi</span>
+                            <i class="fa fa-dashboard"></i> <span>Oyuncu Listesi</span>
                             @*<span class="pull-right-container">
-                                    <small class="label pull-right bg-green">new</small>
-                                </span>*@
+                    <small class="label pull-right bg-green">new</small>
+                </span>*@
                         </a>
                     </li>
                     @if (currentplayer.PlayerIsAdmin)
@@ -365,28 +151,35 @@
                             <a href="~/Player/ScoreList">
                                 <i class="fa fa-th"></i> <span>Ortalama Puan Listesi</span>
                                 @*<span class="pull-right-container">
-                                        <small class="label pull-right bg-green">new</small>
-                                    </span>*@
+                        <small class="label pull-right bg-green">new</small>
+                    </span>*@
                             </a>
                         </li>
                     }
 
                     <li>
                         <a href="~/Home/Index">
-                            <i class="fa fa-th"></i> <span>Puan Takip Listesi</span>
+                            <i class="fa fa-bookmark-o"></i> <span>Puan Takip Listesi</span>
                             @*<span class="pull-right-container">
-                                    <small class="label pull-right bg-green">new</small>
-                                </span>*@
+                    <small class="label pull-right bg-green">new</small>
+                </span>*@
                         </a>
                     </li>
                     <li>
                         <a href="~/Mail/SendMail">
-                            <i class="fa fa-th"></i> <span>Mailbox</span>
+                            <i class="fa fa-envelope"></i> <span>Mailbox</span>
                             @*<span class="pull-right-container">
-                                    <small class="label pull-right bg-green">new</small>
-                                </span>*@
+                    <small class="label pull-right bg-green">new</small>
+                </span>*@
                         </a>
                     </li>
+                    <li>
+                        <a href="~/Player/CreateEvent">
+                            <i class="fa fa-table"></i> <span>Etkinlik Oluştur</span>
+                        </a>
+                    </li>
+                    <li class="header">Chat Odası</li>
+                    <li><a href="~/Chat/Chat"><i class="fa fa-circle-o text-aqua"></i> <span>Sohbeti Başlat</span></a></li>
 
                 </ul>
             </section>
@@ -442,7 +235,10 @@
 <script src="~/Content/AdminLTE-2.4.5/bower_components/fastclick/lib/fastclick.js"></script>
 <script src="~/Content/AdminLTE-2.4.5/dist/js/adminlte.min.js"></script>
 <script src="~/Content/AdminLTE-2.4.5/dist/js/demo.js"></script>
-
+<script src="~/Content/AdminLTE-2.4.5/bower_components/select2/dist/js/select2.full.min.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/plugins/input-mask/jquery.inputmask.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/plugins/input-mask/jquery.inputmask.date.extensions.js"></script>
+<script src="~/Content/AdminLTE-2.4.5/plugins/input-mask/jquery.inputmask.extensions.js"></script>
 <script src="~/Content/AdminLTE-2.4.5/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
 <script src="~/Scripts/jquery.signalR-2.4.1.js"></script>
 <script src="/signalr/hubs" type="text/javascript"></script>
@@ -499,64 +295,22 @@
 </script>
 
 
-@helper ProcessToastrs()
-{
-    List<(DateTime Date, string SessionId, Toastr Toastr)> toastrs = ToastrService.ReadAndRemoveUserQueue();
-    if (toastrs != null && toastrs.Count > 0)
-    {
-        foreach (var item in toastrs)
-        {
-            @*@:toastr.success('@item.Toastr.Message','@item.Toastr.Title')*@
-            ShowToastr(item.Toastr);
-        }
+<script>
 
 
-    }
-}
+    $(function () {
+        //Initialize Select2 Elements
+        $('.select2').select2()
 
-@helper ShowToastr(Toastr item)
-{
-    switch (item.Type)
-    {
-        case ToastrType.Info:
-            @ToastrInfo(item.Message, item.Title)
-            break;
-        case ToastrType.Success:
-            @ToastrSuccess(item.Message, item.Title)
-            break;
-        case ToastrType.Warning:
-            @ToastrWarning(item.Message, item.Title)
-            break;
-        case ToastrType.Error:
-            @ToastrError(item.Message, item.Title)
-            break;
-        default:
-            @ToastrInfo(item.Message, item.Title)
-            break;
-    }
-}
+        //Datemask dd/mm/yyyy
+        $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+        //Datemask2 mm/dd/yyyy
+        $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+        //Money Euro
+        $('[data-mask]').inputmask()
+    });
 
-@helper ToastrInfo(string message, string title)
-{
-    <script>
-        toastr.info('@message', '@title');
-    </script>
-}
-@helper ToastrWarning(string message, string title)
-{
-    <script>
-        toastr.warning('@message', '@title');
-    </script>
-}
-@helper ToastrSuccess(string message, string title)
-{
-    <script>
-        toastr.success('@message', '@title');
-    </script>
-}
-@helper ToastrError(string message, string title)
-{
-    <script>
-        toastr.error('@message', '@title');
-    </script>
-}
+
+</script>
+
+

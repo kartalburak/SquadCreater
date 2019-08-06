@@ -1,0 +1,118 @@
+﻿@using RandomSquadCreater.Core
+
+
+
+@{
+    var dt = DateTime.Now.ToShortDateString();
+    int count = 0;
+    int bestPoint = 0;
+    string bestPlayer = "";
+    int worstPoint = 100;
+    string worstPlayer = "";
+}
+
+@foreach (var item in ViewBag.GetAllPlayers)
+{
+    count++;
+}
+
+@{
+    foreach (var list in ViewBag.AllPlayers)
+    {
+        if (list.PlayerPower > bestPoint)
+        {
+            bestPoint = list.PlayerPower;
+            bestPlayer = list.PlayerName + " " + list.PlayerSurname;
+        }
+        else if (list.PlayerPower < worstPoint)
+        {
+            worstPoint = list.PlayerPower;
+            worstPlayer = list.PlayerName + " " + list.PlayerSurname;
+        }
+    }
+
+    int percent = 100 * count / 14;
+}
+
+
+
+
+<div class="row">
+
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-yellow">
+            <span class="info-box-icon"><i class="fa fa-calendar"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Etkinlik: 14 kişilik</span>
+                <span class="info-box-number">Halı Saha</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: 100%"></div>
+                </div>
+                <span class="progress-description">
+                    Tarih: @dt
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-green">
+            <span class="info-box-icon"><i class="fa fa-thumbs-o-up"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Etkinliğe Katılan Kişi Sayısı</span>
+                <span class="info-box-number">@count</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: @percent%"></div>
+                </div>
+                <span class="progress-description">
+                    Kadro @percent %' dolu.
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-aqua">
+            <span class="info-box-icon"><i class="fa fa-bolt"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Tüm zamanların en iyi oyuncusu</span>
+                <span class="info-box-number">@bestPlayer</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: @bestPoint%"></div>
+                </div>
+                <span class="progress-description">
+                    Ortalama Puanı: @bestPoint
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+    <div class="col-md-3 col-sm-6 col-xs-12">
+        <div class="info-box bg-red">
+            <span class="info-box-icon"><i class="fa fa-exclamation"></i></span>
+
+            <div class="info-box-content">
+                <span class="info-box-text">Tüm zamanların en kötü oyuncu</span>
+                <span class="info-box-number">@worstPlayer</span>
+
+                <div class="progress">
+                    <div class="progress-bar" style="width: @worstPoint%"></div>
+                </div>
+                <span class="progress-description">
+                    Ortalama Puanı: @worstPoint
+                </span>
+            </div>
+            <!-- /.info-box-content -->
+        </div>
+        <!-- /.info-box -->
+    </div>
+</div>

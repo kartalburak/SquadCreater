@@ -17,6 +17,7 @@ namespace RandomSquadCreater
         public virtual DbSet<Rating> Rating { get; set; }
         public virtual DbSet<Player> Player { get; set; }
         public virtual DbSet<Mails> Mails { get; set; }
+        public virtual DbSet<Event> Event { get; set; }
 
 
     }

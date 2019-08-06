@@ -110,11 +110,8 @@ namespace RandomSquadCreater.UI.Controllers
             }
             //Player player = Session["user"] as Player;
             //ViewBag.RateModel = service.GetAllRatings().Where(x => x.Rated == player.PlayerId).FirstOrDefault();
-
             List<Player> comingPlayers = new List<Player>();
             List<Player> players = service.GetAllPlayer().Where(x => x.PlayerIsComing == true).ToList();//event date control 
-
-
             foreach (var player in players)
             {
                 if (DateTime.Now.Subtract(player.PlayerVoteDate).TotalDays < 7)
@@ -123,8 +120,7 @@ namespace RandomSquadCreater.UI.Controllers
                 }
             }
 
-
-
+            ViewBag.AllPlayers = service.GetAllPlayer();
             ViewBag.GetAllPlayers = comingPlayers;
             if (Session["Players"] == null)
             {
@@ -316,6 +312,25 @@ namespace RandomSquadCreater.UI.Controllers
             }
 
             return Json(new { Result = true });
+        }
+
+
+        public ActionResult CreateEvent()
+        {
+
+
+
+
+            //ViewBag.Events=service.
+
+
+            return View();
+        }
+
+        public ActionResult CreateDashboard()
+        {
+
+            return PartialView();
         }
 
 
